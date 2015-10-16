@@ -1,0 +1,339 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="DevOps.SiteMaster" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title><%: Page.Title %> - DevOps</title>
+
+     <!-- Custom Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link href='https://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
+
+<!-- Custom Style -->
+    <style>
+        .aang {
+            border: 3px solid #FFF; 
+            border-radius: 50%;
+            box-shadow: rgba(0, 0, 0, 0.40) 1px 5px 5px;
+            color: #FFF;
+            font-family: 'Open Sans',serif;
+            font-size: 32px;
+            height: 100px; 
+            width: 100px; 
+            margin: 0 auto; 
+            text-align: center;
+            text-shadow: 1px 0px 2px rgba(0, 0, 0, 0.40);
+            padding: 25px;
+            vertical-align: central;
+        }
+
+        .eid, .userType, .eid1 {
+            color: #FFF;
+            font-family: 'Lato', serif;
+            font-size: 20px;
+            font-weight: 300;
+        }
+
+        .eid {
+            display: none;
+        }
+
+        .userType {
+            font-size: 17px;
+        }
+
+    </style>
+
+ <!-- Bootstrap Core CSS -->
+    <link href="~/bootstrap/css/bootstrap.css" rel="stylesheet" />
+
+    <!-- MetisMenu CSS -->
+    <link href="~/bootstrap/css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet" />
+
+    <!-- dataTables CSS -->
+    <link href="~/bootstrap/css/plugins/dataTables.bootstrap.css" rel="stylesheet" />
+
+    <!-- Timeline CSS -->
+    <link href="~/bootstrap/css/plugins/timeline.css" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    <link href="~/bootstrap/css/sb-admin-2.css" rel="stylesheet" />
+
+    <!-- Morris Charts CSS -->
+    <link href="~/bootstrap/css/plugins/morris.css" rel="stylesheet" />
+
+    <!-- Custom Fonts -->
+    <%--<link href="~/bootstrap/font-awesome-4.1.0/css/font-awesome.css" rel="stylesheet"  />--%>
+    <link href="~/bootstrap/font-awesome-4.2.0/css/font-awesome.css" rel="stylesheet"  />
+    
+    <%-- jQuery UI CSS --%>
+    <link href="~/Content/jquery-ui.css" rel="stylesheet" />
+
+    <!-- Custom Overlay -->
+    <link href="~/Content/overlay.css" rel="stylesheet" />
+
+    <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    
+    <asp:PlaceHolder runat="server">
+        <!-- jQuery -->
+        <script src="<%: ResolveUrl("~/bootstrap/js/jquery.js") %>"></script>
+        <script src="<%: ResolveUrl("~/Content/jquery-ui.js") %>"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="<%: ResolveUrl("~/bootstrap/js/bootstrap.min.js") %>"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="<%: ResolveUrl("~/bootstrap/js/plugins/metisMenu/metisMenu.min.js") %>"></script>
+
+        <!-- dataTables Plugin JavaScript -->
+        <script src="<%: ResolveUrl("~/bootstrap/js/plugins/dataTables/jquery.dataTables.js") %>"></script>
+        <script src="<%: ResolveUrl("~/bootstrap/js/plugins/dataTables/dataTables.bootstrap.js") %>"></script>
+
+        <!-- Morris Charts JavaScript -->
+        <%--<script src="<%: ResolveUrl("~/bootstrap/js/plugins/morris/raphael.min.js") %>"></script>
+        <script src="<%: ResolveUrl("~/bootstrap/js/plugins/morris/morris.min.js") %>"></script>
+        <script src="<%: ResolveUrl("~/bootstrap/js/plugins/morris/morris-data.js") %>"></script>--%>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="<%: ResolveUrl("~/bootstrap/js/sb-admin-2.js") %>"></script>
+        
+        <script src="<%: ResolveUrl("~/Scripts/jquery.scrollTo.min.js") %>"></script>
+        <script src="<%: ResolveUrl("~/Scripts/spin.js") %>"></script>
+        <script src="<%: ResolveUrl("~/Scripts/moment.min.js") %>"></script>
+        
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="<%: ResolveUrl("~/bootstrap/html5shiv.js") %>"></script>
+        <script src="<%: ResolveUrl("~/bootstrap/respond.min.js") %>"></script>
+        <![endif]-->
+        <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
+        <script src="<%: ResolveUrl("~/Scripts/modernizr-2.6.2.js") %>"></script>
+    </asp:PlaceHolder>
+</head>
+
+
+<body>
+    <form runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+            </Scripts>
+        </asp:ScriptManager>
+        <div id="wrapper">
+            
+            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0; position: fixed; width: 100%" >
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div style="margin-top: 5px; margin-left: 5px; float: left">
+                        <i class="fa fa-rocket fa-3x" style="color: rgba(255, 255, 255, 1.0)"></i>
+                    </div>
+                    <a class="navbar-brand" style="text-decoration:none; font-family:'Lato', serif; font-weight: 300; float: left" href="../Default.aspx">DevOps Battle of the Brains</a>
+                </div>
+                <!-- /.navbar-header -->
+
+                <div class="navbar-default sidebar" role="navigation" style="box-shadow: rgba(0, 0, 0, 0.40) 1px 0px 2px; height: 100%; background: #2C3E50; position:fixed">
+                    <div class="sidebar-nav navbar-collapse">
+                        <ul class="nav" id="side-menu" style="background: rgba(44, 62, 80,1.0); color: #FFF ">
+                            <li class="sidebar-search" style="text-align: center">
+                                <div class="aang"></div>
+                                <asp:Label ID="lblEid" runat="server" CssClass="eid"></asp:Label><br />
+                                <div class="eid1"></div>
+                                <asp:Label ID="lblType" runat="server" CssClass="userType"></asp:Label><br />
+                                <input type="hidden" id="dEid" />
+                                <span><%: DateTime.Now.ToShortDateString() %></span><br />
+                            </li>
+                            <li class="dashboard" id="dashboardtick"><!-- Dashboard Homepage -->
+                                <a href="<%: ResolveUrl("~/Default.aspx") %>" style="color: #FFF"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            </li>
+                             
+                            <li class="adminPanel">
+                                <!-- Administrator Panel -->
+                                <a id="AdminPanel" runat="server" href="#" style="color: #FFF; display:none;" ><i class="fa fa-user fa-fw"></i> Administrator Panel<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="<%: ResolveUrl("~/AdminPanel/Adminmgmt.aspx") %>" style="color: #FFF"><i class="glyphicon glyphicon-user"></i> Make a User Admin</a>
+                                    </li>
+                                    <li>
+                                        <a href="<%: ResolveUrl("~/AdminPanel/Activitymgmt.aspx") %>" style="color: #FFF"><i class="glyphicon glyphicon-book"></i> Activity Management</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" style="color: #FFF"><i class="fa fa-calendar fa-fw"></i>Questionaires<span class="fa arrow"></span></a>
+                                        <ul class="nav nav-third-level">
+                                            <li>
+                                                <a href="<%: ResolveUrl("~/Questionaire/Questionaire.aspx") %>" style="color: #FFF"><i class="fa fa-clock-o fa-fw"></i> Add Questionaire</a>
+                                            </li>
+                                            <li>
+                                                <a href="<%: ResolveUrl("~/Logs/Logs.aspx") %>" style="color: #FFF"><i class="fa fa-list fa-fw"></i> Question Logs</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="questionLauncher" id="QuestionLauncher" style="display:none;">
+                                <a href="<%: ResolveUrl("~/ScriptBee/AdminSB.aspx") %>" style="color: #FFF"><i class="fa fa-question-circle fa-fw"></i> Question Launcher</a>
+                             </li>
+                            <li class="scriptBee" id="BattleoftheBrains" style="display:none;">
+                                <a href="<%: ResolveUrl("~/ScriptBee/UserSB.aspx") %>" style="color: #FFF"><i class="fa fa-puzzle-piece fa-fw"></i> Quiz Bee</a>
+                            </li>
+                            <li class="aboutpanel">
+                                
+                                <a id="A1" runat="server" href="#" style="color: #FFF;"><i class=" glyphicon glyphicon-expand"></i> About<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="<%: ResolveUrl("~/About/CalendarActivity.aspx") %>" style="color: #FFF"><i class="glyphicon glyphicon-calendar"></i> Calendar Activity</a>
+                                    </li>
+                                    <li>
+                                        <a href="<%: ResolveUrl("https://www.accenture.com/t20150523T022807__w__/ph-en/_acnmedia/Accenture/Conversion-Assets/DotCom/Documents/Global/PDF/Dualpub_10/Accenture-DevOps-Services-Overview.pdf") %>" style="color: #FFF"><i class="glyphicon glyphicon-book"></i> Facts About DevOps</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.sidebar-collapse -->
+                </div>
+                <!-- /.navbar-static-side -->
+            </nav>
+            
+            <!-- /#page-wrapper -->
+
+            <asp:ContentPlaceHolder runat="server" ID="FeaturedContent" />
+            
+            <asp:ContentPlaceHolder runat="server" ID="MainContent" />
+            
+        </div>
+        <%--<footer>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
+                </div>
+            </div>
+        </footer>--%>
+    </form>
+</body>
+    
+</html>
+
+<script type="text/javascript">
+    var prm = new Sys.WebForms.PageRequestManager.getInstance();
+    prm.add_initializeRequest(initializer);
+    prm.add_endRequest(ender);
+    prm.add_pageLoaded(loader);
+
+    function initializer(sender, args) {
+    }
+
+    function ender(sender, args) {
+
+    }
+
+    function loader(sender, args) {
+        $(document).ready(function () {
+
+            if ('<%: Session["Type"]%>' == 'User') {
+                $('#AdminPanel').hide();
+                $('#QuestionLauncher').hide();
+                $('#BattleoftheBrains').show()
+                //window.location.href = "/About/CalendarActivity.aspx";
+            }
+            else if ('<%: Session["Type"]%>' == 'Administrator') {
+                $('#AdminPanel').show();
+                $('#QuestionLauncher').show();
+                $('#BattleoftheBrains').hide()
+            }
+            else if ('<%: Session["Type"]%>' == '') {
+                alert('You are not Authorized to use this Tool!..');
+                window.location.href = "/Login.aspx";
+            }
+            else if ('<%: Session["lanid"]%>' == '') {
+                alert('You are not Authorized to use this Tool!..');
+                window.location.href = "/Login.aspx";
+            }
+            
+
+            var currentUrl = top.location.pathname;
+            var dirPathCon = currentUrl.split("/");
+            var dirPath = dirPathCon[dirPathCon.length - 1];
+            var dirPathNoExt = dirPath.split(".");
+            dirPathNoExt = dirPathNoExt[0];
+            console.log(dirPathNoExt);
+            var name = getNameInitials($('#lblEid').text());
+            var color = colorPicker();
+            /* Avatar Specifications */
+            $('.eid1').append('<p style="margin: 0">' + nameGenerator($('#lblEid').text()) + '</p>');
+            $('.aang').append('<p class="avatarName">' + name + '</p>');
+            $('.aang').css("background", color);
+            $('.qbtopline').css("background", colorPicker());
+            $('.avatarName').css("margin", "0");
+
+            if (dirPathNoExt == "AdminSB") {
+                $('#side-menu').children('.scriptBee').children('a').removeClass('active');
+                $('#side-menu').children('.dashboard').children('a').removeClass('active');
+                $('#side-menu').children('.questionLauncher').children('a').addClass('active');
+            } else if (dirPathNoExt == "UserSB") {
+                $('#side-menu').children('.questionLauncher').children('a').removeClass('active');
+                $('#side-menu').children('.dashboard').children('a').removeClass('active');
+                $('#side-menu').children('.scriptBee').children('a').addClass('active');
+            } else if (dirPathNoExt == "Default") {
+                $('#side-menu').children('.scriptBee').children('a').removeClass('active');
+                $('#side-menu').children('.questionLauncher').children('a').removeClass('active');
+                $('#side-menu').children('.dashboard').children('a').addClass('active');
+            } 
+            //alert(document.getElementById("lblType").text);
+           
+        })
+
+    }
+
+    var colorPicker = function () {
+        var color = '#';
+        var colorSet = 'ABCDEF0123456789'
+        for (var i = 0; i < 6; i++) {
+            color += colorSet.charAt(Math.floor(Math.random() * (colorSet.length - 1) + 1));
+            if (i == 5 && color == "#FFFFFF") {
+                i = 0;
+                color = '#';
+            }
+        }
+        return color;
+    }
+
+    var strSplitter = function (str, delim) {
+        var strArr = str.split(delim);
+        return strArr;
+    }
+
+    var getNameInitials = function (str) {
+        var eidArr = strSplitter(str, ".");
+        var fname = eidArr[0][0];
+        var lname = eidArr[eidArr.length - 1][0];
+        var name = fname + lname;
+        return name.toUpperCase();
+    }
+
+    var capitalize = function (str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    var nameGenerator = function (str) {
+        var eidArr = strSplitter(str, ".");
+        var name = '';
+        for (var i = 0; i < eidArr.length; i++) {
+            if (eidArr[i].length > 1) {
+                name += capitalize(eidArr[i]) + " ";
+            }
+        }
+        return name;
+    }
+
+  
+</script>
