@@ -55,6 +55,9 @@ namespace DevOps.Questionaire
             _sbobj.Question = _arr[0].ToString();
             _sbobj.Answer = _arr[1].ToString();
             _sbobj.Difficulty = _arr[2].ToString();
+            _sbobj.Answer1 = _arr[3].ToString();
+            _sbobj.Answer2 = _arr[4].ToString();
+            _sbobj.Answer3 = _arr[5].ToString();
             return _sbobj.AddQuestionaire();
         }
 
@@ -86,6 +89,12 @@ namespace DevOps.Questionaire
             _sbobj.Question = _arr[1].ToString();
             _sbobj.Answer = _arr[2].ToString();
             _sbobj.Difficulty = _arr[3].ToString();
+            _sbobj.Answer1 = _arr[4].ToString();
+            _sbobj.Answer2 = _arr[5].ToString();
+            _sbobj.Answer3 = _arr[6].ToString();
+            _sbobj.Danswer1 = _arr[7].ToString();
+            _sbobj.Danswer2 = _arr[8].ToString();
+            _sbobj.Danswer3 = _arr[9].ToString();
             
             return _sbobj.UpdateQuestionaire();
         }

@@ -70,6 +70,24 @@ namespace DevOps.ScriptBee
             return ds.GetXml();
         }
 
+        [System.Web.Services.WebMethodAttribute(), System.Web.Script.Services.ScriptMethodAttribute()]
+        public static string loadChoices(Int32 questid)
+        {
+            SBObj _sbobj = new SBObj();
+            _sbobj.QuestionID = questid;
+            DataSet ds = new DataSet();
+            try
+            {
+                ds.Tables.Add(_sbobj.LoadChoices());
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return ds.GetXml();
+        }
+
+
 
 
         //[System.Web.Services.WebMethodAttribute(), System.Web.Script.Services.ScriptMethodAttribute()]

@@ -14,7 +14,7 @@ namespace DevOps.SystemObjects
 
 
         #region Declaration
-        private string _question, _answer, _difficulty, _status, _eid, _guestanswer, _capability, _project, _type, _title, _description, _message;
+        private string _question, _answer, _difficulty, _status, _eid, _guestanswer, _capability, _project, _type, _title, _description, _message, _answer1, _answer2, _answer3, _danswer1, _danswer2, _danswer3;
         private int _questionid, _userno;
         private DateTime? _date;
         #endregion
@@ -53,6 +53,18 @@ namespace DevOps.SystemObjects
         { set { _description = value; } }
         public String Message
         { set { _message = value; } }
+        public String Answer1
+        { set { _answer1 = value; } }
+        public String Answer2
+        { set { _answer2 = value; } }
+        public String Answer3
+        { set { _answer3 = value; } }
+        public String Danswer1
+        { set { _danswer1 = value; } }
+        public String Danswer2
+        { set { _danswer2 = value; } }
+        public String Danswer3
+        { set { _danswer3 = value; } }
         #endregion
 
         #region DATE
@@ -91,6 +103,9 @@ namespace DevOps.SystemObjects
             oParam.AddWithValue("@question", _question);
             oParam.AddWithValue("@answer", _answer);
             oParam.AddWithValue("@difficulty", _difficulty);
+            oParam.AddWithValue("@answer1", _answer1);
+            oParam.AddWithValue("@answer2", _answer2);
+            oParam.AddWithValue("@answer3", _answer3);
             try
             {
                 this.ExecuteInsert(@"TBInsertQuestionaire", oParam);
@@ -112,6 +127,12 @@ namespace DevOps.SystemObjects
             oParam.AddWithValue("@question", _question);
             oParam.AddWithValue("@answer", _answer);
             oParam.AddWithValue("@difficulty", _difficulty);
+            oParam.AddWithValue("@answer1", _answer1);
+            oParam.AddWithValue("@answer2", _answer2);
+            oParam.AddWithValue("@answer3", _answer3);
+            oParam.AddWithValue("@danswer1", _danswer1);
+            oParam.AddWithValue("@danswer2", _danswer2);
+            oParam.AddWithValue("@danswer3", _danswer3);
             try
             {
                 this.ExecuteInsert(@"TBUpdateQuestionaire", oParam);
@@ -239,6 +260,14 @@ namespace DevOps.SystemObjects
             var oParam = new SqlCommand().Parameters;
             oParam.AddWithValue("@questionid", _questionid);
             return dt = this.FGetDataTable(@"SBDisplayQuestionInfo", oParam);
+        }
+
+        public DataTable LoadChoices()
+        {
+            DataTable dt = new DataTable();
+            var oParam = new SqlCommand().Parameters;
+            oParam.AddWithValue("@questionid", _questionid);
+            return dt = this.FGetDataTable(@"[SBDisplayChoices]", oParam);
         }
 
         public DataTable CheckAnswer()

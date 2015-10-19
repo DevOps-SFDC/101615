@@ -10,7 +10,6 @@
         #gridQuestiondetails > thead > tr:first-child {
             background: #00693C !important;
             color: #fff;
-            
         }
 
         #gridQuestiondetails > tbody > tr:first-child {
@@ -35,9 +34,9 @@
         </div>
 
         <div class="row">
-             <div class="col-lg-12">
+            <div class="col-lg-12">
                 <br />
-                <button id="addquestionaire" type="button" class="btn btn-success pull-right"><i class="fa fa-plus fa-fw"></i> Add Questionaire</button>
+                <button id="addquestionaire" type="button" class="btn btn-success pull-right"><i class="fa fa-plus fa-fw"></i>Add Questionaire</button>
                 <div class="clearfix"></div>
             </div>
         </div>
@@ -59,7 +58,7 @@
 
                 <div class="col-xs-3">
                     <div class="form-group">
-                        <label>Answer :</label>
+                        <label>Correct Answer :</label>
                         <input type="text" id="answer" class="form-control" placeholder="Your Answer.." />
                         <div class="clearfix"></div>
                     </div>
@@ -77,6 +76,31 @@
                     </div>
                 </div>
 
+            </div>
+            <div class="col-xs-12">
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <label>Dummy Answer 1:</label>
+                        <input type="text" id="answer1" class="form-control" placeholder="Your Dummy Answer.." />
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <label>Dummy Answer 2:</label>
+                        <input type="text" id="answer2" class="form-control" placeholder="Your Dummy Answer.." />
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <label>Dummy Answer 3:</label>
+                        <input type="text" id="answer3" class="form-control" placeholder="Your Dummy Answer.." />
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
             </div>
 
 
@@ -154,6 +178,27 @@
                         </div>
                         <br />
 
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="col-md-4">
+                                    <label>Dummy Answer 1 :</label>
+                                    <input type="hidden" id="danswer1" />
+                                    <input type="text" id="txtanswer1" placeholder="What is the Dummy Answer?.." class="form-control" />
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Dummy Answer 2:</label>
+                                    <input type="hidden" id="danswer2" />
+                                    <input type="text" id="txtanswer2" placeholder="What is the Dummy Answer?.." class="form-control" />
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Dummy Answer 3:</label>
+                                    <input type="hidden" id="danswer3" />
+                                    <input type="text" id="txtanswer3" placeholder="What is the Dummy Answer?.." class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+
                     </div>
 
                     <div class="modal-footer">
@@ -188,13 +233,31 @@
                             <div class="col-lg-12">
                                 <div class="col-md-6">
                                     <label>Answer :</label>
-                                    <input type="text" id="txtanswerd" class="form-control" readonly/>
+                                    <input type="text" id="txtanswerd" class="form-control" readonly />
                                 </div>
                                 <div class="col-md-2">
                                 </div>
                                 <div class="col-md-4">
                                     <label>Difficulty :</label>
-                                    <input type="text" id="txtdifficultyd" class="form-control" readonly/>
+                                    <input type="text" id="txtdifficultyd" class="form-control" readonly />
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="col-md-4">
+                                    <label>Dummy Answer 1 :</label>
+                                    <input type="text" id="txtanswer1d" placeholder="What is the Dummy Answer?.." class="form-control" readonly />
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Dummy Answer 2:</label>
+                                    <input type="text" id="txtanswer2d" placeholder="What is the Dummy Answer?.." class="form-control" readonly />
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Dummy Answer 3:</label>
+                                    <input type="text" id="txtanswer3d" placeholder="What is the Dummy Answer?.." class="form-control" readonly />
                                 </div>
                             </div>
                         </div>
@@ -233,6 +296,7 @@
                     window.location.href = "/Default.aspx";
                 }
                 else if ('<%: Session["Type"]%>' == 'Administrator'); {
+                    refreshquestionform();
                     DisplayQuestionaires();
                 }
             })
@@ -274,6 +338,9 @@
             $('#question').val('');
             $('#answer').val('');
             $('#difficulty').val(0);
+            $('#answer1').val('');
+            $('#answer2').val('');
+            $('#answer3').val('');
         }
 
         //Validate Question form if the field is NULL
@@ -289,6 +356,18 @@
             else if ($('#difficulty').val() == 0) {
                 alert('Please Select a Difficulty!..');
                 $('#difficulty').focus();
+            }
+            else if ($('#answer1').val() == '') {
+                alert('Please Insert a Dummy Answer 1!..');
+                $('#answer1').focus();
+            }
+            else if ($('#answer2').val() == '') {
+                alert('Please Insert a Dummy Answer 2!..');
+                $('#answer2').focus();
+            }
+            else if ($('#answer3').val() == '') {
+                alert('Please Insert a Dummy Answer 3!..');
+                $('#answer3').focus();
             }
             else {
                 AddQuestionaire();
@@ -308,6 +387,18 @@
             else if ($('#txtdifficulty').val() == 0) {
                 alert('Please Select a Difficulty!..');
                 $('#txtdifficulty').focus();
+            }
+            else if ($('#txtanswer1').val() == '') {
+                alert('Please Insert a Dummy Answer 1!..');
+                $('#txtanswer1').focus();
+            }
+            else if ($('#txtanswer2').val() == '') {
+                alert('Please Insert a Dummy Answer 2!..');
+                $('#txtanswer2').focus();
+            }
+            else if ($('#txtanswer3').val() == '') {
+                alert('Please Insert a Dummy Answer 3!..');
+                $('#txtanswer3').focus();
             }
             else {
                 UpdateQuestionaire();
@@ -368,7 +459,9 @@
             arr[0] = $('#question').val();
             arr[1] = $('#answer').val();
             arr[2] = $('#difficulty').val();
-
+            arr[3] = $('#answer1').val();
+            arr[4] = $('#answer2').val();
+            arr[5] = $('#answer3').val();
             $.ajax({
                 type: "POST",
                 url: "Questionaire.aspx/addQuestionaire",
@@ -385,7 +478,6 @@
                 $('#questionform').slideUp('slow');
                 $('#questiondetails').slideDown('slow');
                 refreshquestionform();
-
                 alert('Question Saved! ');
                 DisplayQuestionaires();
             }
@@ -417,8 +509,14 @@
 
                     $('#txtquestionid').val($(this).find("QuestionID").text());
                     $('#txtquestion').val($(this).find("Question").text());
-                    $('#txtanswer').val($(this).find("Answer").text());
+                    $('#txtanswer').val($(this).find("CorrectAnswer").text());
                     $('#txtdifficulty').val($(this).find("Difficulty").text());
+                    $('#txtanswer1').val($(this).find("Answer2").text());
+                    $('#danswer1').val($(this).find("Answer2").text());
+                    $('#txtanswer2').val($(this).find("Answer3").text());
+                    $('#danswer2').val($(this).find("Answer3").text());
+                    $('#txtanswer3').val($(this).find("Answer4").text());
+                    $('#danswer3').val($(this).find("Answer4").text());
                 });
             }
             function AjaxError(response) {
@@ -436,6 +534,12 @@
             arr[1] = $('#txtquestion').val();
             arr[2] = $('#txtanswer').val();
             arr[3] = $('#txtdifficulty').val();
+            arr[4] = $('#txtanswer1').val();
+            arr[5] = $('#txtanswer2').val();
+            arr[6] = $('#txtanswer3').val();
+            arr[7] = $('#danswer1').val();
+            arr[8] = $('#danswer2').val();
+            arr[9] = $('#danswer3').val();
 
             $.ajax({
                 type: "POST",
@@ -484,8 +588,11 @@
 
                     $('#txtquestionidd').val($(this).find("QuestionID").text());
                     $('#txtquestiond').val($(this).find("Question").text());
-                    $('#txtanswerd').val($(this).find("Answer").text());
+                    $('#txtanswerd').val($(this).find("CorrectAnswer").text());
                     $('#txtdifficultyd').val($(this).find("Difficulty").text());
+                    $('#txtanswer1d').val($(this).find("Answer2").text());
+                    $('#txtanswer2d').val($(this).find("Answer3").text());
+                    $('#txtanswer3d').val($(this).find("Answer4").text());
                 });
             }
             function AjaxError(response) {
