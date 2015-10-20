@@ -245,7 +245,22 @@
                 InsertRegistration();
             }
 
-        })
+        });
+        $('#EID').keydown(function (e) {
+            if (e.keyCode === 13) {
+                $('#REG').click();
+            }
+        });
+        $('#CAP').keydown(function (e) {
+            if (e.keyCode === 13) {
+                $('#REG').click();
+            }
+        });
+        $('#PRO').keydown(function (e) {
+            if (e.keyCode === 13) {
+                $('#REG').click();
+            }
+        });
      
         function InsertRegistration() {
             var arr = new Array();

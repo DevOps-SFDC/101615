@@ -750,6 +750,7 @@
                            $('#myModalLabel1').text('Ooopps ! Better Luck next Time!');
                            $('#gtra').text('You Choose the Wrong Answer');
                            ans = '';
+                           CheckifAnswered($('#questionid').val());
                        }
                        else {
 
