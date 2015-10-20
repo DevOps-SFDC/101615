@@ -279,23 +279,25 @@
                 //    $('.qbbtnsubmit').remove();
                 //    $('.qbbtn').append('<button type="button" class="btn btn-success qbbtnsubmit" id="guestsubmit" style="height: 50px; width: 90px"><span class="qbbtnsubmittxt">Submit</span></button>');
                 //});
+
+
                 if ('<%: Session["Type"]%>' == 'Administrator') {
                     alert('You are not Authorized to use this Tool!..');
                     window.location.href = "/Default.aspx";
                 }
                 else if ('<%: Session["Type"]%>' == 'User'); {
                     $('#questionid').val(0);
+
                     refreshquestionform();
-                    setInterval(LoadQuestdummyid, 500);
-                    setInterval(CheckdbAnswered, 500);
-
-
-
+                    setInterval(LoadQuestdummyid, 300);
+                    setInterval(CheckdbAnswered, 300);
+                    $('#answer1').disableSelection();
+                    $('#answer2').disableSelection();
+                    $('#answer3').disableSelection();
+                    $('#answer4').disableSelection();
                 }
             });
         };
-
-
 
 
         $('#notification').keydown(function (e) {
@@ -313,11 +315,7 @@
 
 
         $('#guestsubmitt').click(function () {
-            //alert('1');
-            //CheckAnswer($('#questionid').val());
-            //CheckAnswer($('#guestanswer').val());
             CheckAnswer();
-            //showmodal();
         });
 
         $('#dissmiss').click(function () {
@@ -396,6 +394,7 @@
                     else {
                         //alert('2');
                         //clearnotifmodal();
+                        //$('#notification').modal('hide');
                         $('#questionid').val(0);
                         refreshquestionform();
                         killInterval();
@@ -577,6 +576,7 @@
                          
                        }
                        else {
+                           $('#notification').modal('hide');
                            $('#countdowntostart').modal('show');
                            countdownto3modal();
                            $('#questionid').val($(this).find("QuestionID").text());
@@ -719,67 +719,6 @@
 
 
 
-           //function pickanswer1G() {
-           //    document.getElementById("answer2").style.backgroundColor = "darkorange";
-           //    document.getElementById("answer3").style.backgroundColor = "darkorange";
-           //    document.getElementById("answer4").style.backgroundColor = "darkorange";
-           //    document.getElementById("answer1").style.backgroundColor = "green";
-           //}
-
-           //function pickanswer2G() {
-           //    document.getElementById("answer1").style.backgroundColor = "darkorange";
-           //    document.getElementById("answer3").style.backgroundColor = "darkorange";
-           //    document.getElementById("answer4").style.backgroundColor = "darkorange";
-           //    document.getElementById("answer2").style.backgroundColor = "green";
-           //}
-
-           //function pickanswer3G() {
-           //    document.getElementById("answer2").style.backgroundColor = "darkorange";
-           //    document.getElementById("answer1").style.backgroundColor = "darkorange";
-           //    document.getElementById("answer4").style.backgroundColor = "darkorange";
-           //    document.getElementById("answer3").style.backgroundColor = "green";
-           //}
-
-           //function pickanswer4G() {
-           //    document.getElementById("answer2").style.backgroundColor = "darkorange";
-           //    document.getElementById("answer3").style.backgroundColor = "darkorange";
-           //    document.getElementById("answer1").style.backgroundColor = "darkorange";
-           //    document.getElementById("answer4").style.backgroundColor = "green";
-           //}
-
-           //$('#answer1').click(function () {
-           //    pickanswer1G();
-           //});
-           //$('#answer2').click(function () {
-           //    pickanswer2G();
-           //});
-           //$('#answer3').click(function () {
-           //    pickanswer3G();
-           //});
-           //$('#answer4').click(function () {
-           //    pickanswer4G();
-           //});
-
-
-
-
-           //$('#answer1').dblclick(function () {
-           //    ans = $('#answer1').text();
-           //    CheckAnswer();
-           //});
-           //$('#answer2').dblclick(function () {
-           //    ans = $('#answer2').text();
-           //    CheckAnswer();
-           //});
-           //$('#answer3').dblclick(function () {
-           //    ans = $('#answer3').text();
-           //    CheckAnswer();
-           //});
-           //$('#answer4').dblclick(function () {
-           //    ans = $('#answer4').text();
-           //    CheckAnswer();
-           //});
-
            function CheckAnswer() {
                var arr = new Array();
                arr[0] = $('#questionid').val();
@@ -795,6 +734,7 @@
                        var xml = $(xmlDoc);
                        var parents = xml.find("Table1");
                        //UpdateCorrect();
+                       //alert($(this).find("LogNo").text());
                        if (response.d == '<NewDataSet />') {
                            $('#answer1').unbind('click');
                            $('#answer1').unbind('dblclick');
@@ -804,6 +744,7 @@
                            $('#answer3').unbind('dblclick');
                            $('#answer4').unbind('click');
                            $('#answer4').unbind('dblclick');
+
 
                            $('#notification').modal('show');
                            $('#myModalLabel1').text('Ooopps ! Better Luck next Time!');
@@ -844,15 +785,21 @@
 
             function AjaxSucceeded(response) {
                 //SUCESS SUCCESS
-                $('#notification').modal('show');
-                $('#myModalLabel1').text('Congratulations!..');
-                $('#meid1').text('You');
-                $('#gtra').text('Got the right Answer');
-                $('#meid2').text(' + ' + $('#points').val() + ' Points');
-                refreshquestionform();
-                killInterval();
-                $('#errormes').text('');
-                validatequestion();
+                if ($('#questionid').val() == '0' || $('#questionid').val() == '') {
+                    CheckifAnswered($('#questionid').val());
+                }
+                else {
+                    $('#notification').modal('show');
+                    $('#myModalLabel1').text('Congratulations!..');
+                    $('#meid1').text('You');
+                    $('#gtra').text('Got the right Answer');
+                    $('#meid2').text(' + ' + $('#points').val() + ' Points');
+                    refreshquestionform();
+                    killInterval();
+                    $('#errormes').text('');
+                    validatequestion();
+                }
+
 
             }
             function AjaxError(response) {
