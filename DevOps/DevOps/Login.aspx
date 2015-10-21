@@ -191,7 +191,7 @@
                     </form>
                 </div>
             </div>
-            <div class="loginFormBanner" style="display: inline-block; a">
+            <div class="loginFormBanner" style="display: inline-block;">
                 <span style="margin-left: 1%; margin-top: 400px;">Ready to Take <br /> &nbsp;the Challenge?</span>
             </div>
         </div>
@@ -246,21 +246,21 @@
             }
 
         });
-        $('#EID').keydown(function (e) {
-            if (e.keyCode === 13) {
-                $('#REG').click();
-            }
-        });
-        $('#CAP').keydown(function (e) {
-            if (e.keyCode === 13) {
-                $('#REG').click();
-            }
-        });
-        $('#PRO').keydown(function (e) {
-            if (e.keyCode === 13) {
-                $('#REG').click();
-            }
-        });
+        //$('#EID').keydown(function (e) {
+        //    if (e.keyCode === 13) {
+        //        $('#REG').click();
+        //    }
+        //});
+        //$('#CAP').keydown(function (e) {
+        //    if (e.keyCode === 13) {
+        //        $('#REG').click();
+        //    }
+        //});
+        //$('#PRO').keydown(function (e) {
+        //    if (e.keyCode === 13) {
+        //        $('#REG').click();
+        //    }
+        //});
      
         function InsertRegistration() {
             var arr = new Array();
