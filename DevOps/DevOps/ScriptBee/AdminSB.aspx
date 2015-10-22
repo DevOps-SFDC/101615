@@ -184,7 +184,7 @@
                     $('#questionid').val(0);
                     DisplayQuestionaires();
                     refreshquestionform()
-                    setInterval(CheckdbAnswered, 500);
+                    setInterval(CheckdbAnswered, 100);
                 }
             })
         }

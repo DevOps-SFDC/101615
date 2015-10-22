@@ -98,6 +98,16 @@
         .userType {
             font-size: 17px;
         }
+
+        #leaderboard > thead > tr:first-child {
+            background: #fff !important;
+            color: #fff;
+        }
+
+        #leaderboard > tbody > tr:first-child {
+            background: none repeat scroll 0 0 #fff !important;
+            color: #333;
+        }
     </style>
 
 </asp:Content>
@@ -124,19 +134,25 @@
                             <div class="item active">
                                 <img src="./Images/carouselimages/image1.jpg" alt="...">
                                 <div class="carousel-caption">
-                                    ...
+                                    Your Success Today Begins with the DevOps Way.
                                 </div>
                             </div>
                             <div class="item">
                                 <img src="./Images/carouselimages/image2.jpg" alt="...">
                                 <div class="carousel-caption">
-                                    ...
+                                    Your Success Today Begins with the DevOps Way.
                                 </div>
                             </div>
                             <div class="item">
                                 <img src="./Images/carouselimages/image3.jpg" alt="...">
                                 <div class="carousel-caption">
-                                    ...
+                                    Your Success Today Begins with the DevOps Way.
+                                </div>
+                            </div>
+                            <div class="item">
+                                <img src="./Images/carouselimages/image4.jpg" alt="...">
+                                <div class="carousel-caption">
+                                    Your Success Today Begins with the DevOps Way.
                                 </div>
                             </div>
                         </div>
@@ -152,48 +168,83 @@
                         </a>
                     </div>
                 </div>
-
+       
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header" style="text-align: center;">Dashboard</h1>
                 <br />
+                <div class="col-lg-9">
+                    <h2 class="page-header" style="text-align: center;">Rankings</h2>
+                    <div class="col-md-4">
+                        <h2 class="page-header" style="padding-top: 50%; text-align: center;">Top 2</h2>
+                        <div class="aang2"></div>
+                        <br />
+                        <div class="eid3" style="text-align: center;"></div>
+                        <input type="hidden" id="txttp2n" />
+                        <br />
+                        <p id="txttp2s" style="text-align: center;"></p>
+                    </div>
 
-                <div class="col-md-4">
-                    <h2 class="page-header" style="padding-top: 50%; text-align: center;">Top 2</h2>
-                    <div class="aang2"></div>
-                    <br />
-                    <div class="eid3" style="text-align: center;"></div>
-                    <input type="hidden" id="txttp2n" />
-                    <br />
-                    <p id="txttp2s" style="text-align: center;"></p>
+                    <div class="col-md-4">
+                        <h2 class="page-header" style="text-align: center;">Top 1</h2>
+                        <div class="aang1" style="text-align: center;"></div>
+                        <br />
+                        <div class="eid2" style="text-align: center;"></div>
+                        <input type="hidden" id="txttp1n" />
+                        <br />
+                        <p id="txttp1s" style="text-align: center;"></p>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h2 class="page-header" style="padding-top: 50%; text-align: center;">Top 3</h2>
+                        <div class="aang3"></div>
+                        <br />
+                        <div class="eid4" style="text-align: center;"></div>
+                        <input type="hidden" id="txttp3n" />
+                        <br />
+                        <p id="txttp3s" style="text-align: center;"></p>
+                    </div>
                 </div>
+                <div class="col-lg-3">
+                    <%--<h2 class="page-header" style="text-align: center;">Leader Board</h2>--%>
+                     <div class="chat-panel panel panel-default" id="chatpanelszxc">
+                        <div class="panel-heading">
+                            <i class="glyphicon glyphicon-user"></i>
+                            Leader Board
+                            
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table id="leaderboard" class="table table-bordered dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <div class="input-group">
+                                <%--<input id="chatmess" type="text" class="form-control input-sm" placeholder="Type your message here...">--%>
+                                <span class="input-group-btn">
 
-                <div class="col-md-4">
-                    <h2 class="page-header" style="text-align: center;">Top 1</h2>
-                    <div class="aang1" style="text-align: center;"></div>
-                    <br />
-                    <div class="eid2" style="text-align: center;"></div>
-                    <input type="hidden" id="txttp1n" />
-                    <br />
-                    <p id="txttp1s" style="text-align: center;"></p>
+                                    <button class="btn btn-warning btn-sm pull-right" type="button" id="refreshleaderboard">
+                                        Refresh Leader Board
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="col-md-4">
-                    <h2 class="page-header" style="padding-top: 50%; text-align: center;">Top 3</h2>
-                    <div class="aang3"></div>
-                    <br />
-                    <div class="eid4" style="text-align: center;"></div>
-                    <input type="hidden" id="txttp3n" />
-                    <br />
-                    <p id="txttp3s" style="text-align: center;"></p>
-                </div>
-
-
             </div>
         </div>
-
+        <footer class="pull-right">
+            © DevOps Techfair 2015
+        </footer>
 
     </div>
     <script type="text/javascript">
@@ -212,6 +263,7 @@
         function loader(sender, args) {
             $(document).ready(function () {
                 LoadTopScorers();
+                DisplayLeaderBoard();
 
 
 
@@ -219,11 +271,14 @@
             });
         }
 
-
+        $('#refreshleaderboard').click(function () {
+            //LoadTopScorers();
+            DisplayLeaderBoard();
+        });
 
 
         $('.carousel').carousel({
-            interval: 2000
+            interval: 5000
 
         });
 
@@ -369,6 +424,42 @@
         }
 
 
+        function DisplayLeaderBoard() {
+            $('#leaderboard').dataTable().fnDestroy();
+            $('#leaderboard > tbody > tr').remove();
+            var arr = new Array();
+            $.ajax({
+                type: "POST",
+                url: "Default.aspx/displayLeaderBoard",
+                data: JSON.stringify({ _arr: arr }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function AjaxSucceeded(response) {
+                    var xmlDoc = $.parseXML(response.d);
+                    var xml = $(xmlDoc);
+                    var ctm = xml.find("Table1");
+                    $.each(ctm, function () {
+                        var ctm = $(this);
+                        var row = '<tr></tr>';
+                        var col = '<td>';
+                        col += $(this).find("dumID").text() + '. ' + $(this).find("EID").text() + '<br />' + $(this).find("Points").text() + ' Points' + '</td> ';
+
+
+
+                        $("[id*=leaderboard] tbody").append($(row).append(col));
+                    });
+
+                    //$('#leaderboard').dataTable();
+
+
+                },
+                error: function AjaxError(response) { alert(response.status + ' ' + response.statusText); },
+                failure: function AjaxFailure(response) { alert(response.status + ' ' + response.statusText); }
+            });
+        }
+
+
+
         var colorPicker = function () {
             var color = '#';
             var colorSet = 'ABCDEF0123456789'
@@ -409,6 +500,10 @@
             }
             return name;
         }
+
+
+
+
     </script>
 
 </asp:Content>

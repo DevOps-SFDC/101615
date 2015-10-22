@@ -289,8 +289,8 @@
                     $('#questionid').val(0);
 
                     refreshquestionform();
-                    setInterval(LoadQuestdummyid, 300);
-                    setInterval(CheckdbAnswered, 300);
+                    setInterval(LoadQuestdummyid, 100);
+                    setInterval(CheckdbAnswered, 100);
                     $('#answer1').disableSelection();
                     $('#answer2').disableSelection();
                     $('#answer3').disableSelection();
@@ -723,6 +723,7 @@
                var arr = new Array();
                arr[0] = $('#questionid').val();
                arr[1] = ans;
+
                $.ajax({
                    type: "POST",
                    url: "UserSB.aspx/checkAnswer",
@@ -732,36 +733,80 @@
                    success: function AjaxSucceded(response) {
                        var xmlDoc = $.parseXML(response.d);
                        var xml = $(xmlDoc);
-                       var parents = xml.find("Table1");
-                       //UpdateCorrect();
-                       //alert($(this).find("LogNo").text());
-                       if (response.d == '<NewDataSet />') {
-                           $('#answer1').unbind('click');
-                           $('#answer1').unbind('dblclick');
-                           $('#answer2').unbind('click');
-                           $('#answer2').unbind('dblclick');
-                           $('#answer3').unbind('click');
-                           $('#answer3').unbind('dblclick');
-                           $('#answer4').unbind('click');
-                           $('#answer4').unbind('dblclick');
+                       var details = xml.find("Table1");
+                       $.each(details, function () {
+                           var metrics = $(this);
+                           //alert($(this).find("Answer").text());
+                           if (ans == $(this).find("Answer").text()) {
+                               UpdateCorrect();
+                           }
+                           else {
+                               $('#answer1').unbind('click');
+                               $('#answer1').unbind('dblclick');
+                               $('#answer2').unbind('click');
+                               $('#answer2').unbind('dblclick');
+                               $('#answer3').unbind('click');
+                               $('#answer3').unbind('dblclick');
+                               $('#answer4').unbind('click');
+                               $('#answer4').unbind('dblclick');
 
+                               $('#notification').modal('show');
+                               $('#myModalLabel1').text('Ooopps ! Better Luck next Time!');
+                               $('#gtra').text('You Choose the Wrong Answer');
+                               ans = '';
+                           }
+                       });
 
-                           $('#notification').modal('show');
-                           $('#myModalLabel1').text('Ooopps ! Better Luck next Time!');
-                           $('#gtra').text('You Choose the Wrong Answer');
-                           ans = '';
-                           CheckifAnswered($('#questionid').val());
-                       }
-                       else {
-
-                           killInterval();
-                           UpdateCorrect();
-                       }
                    },
                    error: function AjaxError(response) { alert(response.status + ' ' + response.responseText); },
                    failure: function AjaxFailure(response) { response.status + ' ' + response.statusText; }
-               });
-           };
+               })
+           }
+
+
+           //function CheckAnswer() {
+           //    var arr = new Array();
+           //    arr[0] = $('#questionid').val();
+           //    arr[1] = ans;
+           //    $.ajax({
+           //        type: "POST",
+           //        url: "UserSB.aspx/checkAnswer",
+           //        data: JSON.stringify({ _arr: arr }),
+           //        contentType: "application/json; charset=utf-8",
+           //        dataType: "json",
+           //        success: function AjaxSucceded(response) {
+           //            var xmlDoc = $.parseXML(response.d);
+           //            var xml = $(xmlDoc);
+           //            var parents = xml.find("Table1");
+           //            //UpdateCorrect();
+           //            //alert($(this).find("LogNo").text());
+           //            if (response.d == '<NewDataSet />') {
+           //                $('#answer1').unbind('click');
+           //                $('#answer1').unbind('dblclick');
+           //                $('#answer2').unbind('click');
+           //                $('#answer2').unbind('dblclick');
+           //                $('#answer3').unbind('click');
+           //                $('#answer3').unbind('dblclick');
+           //                $('#answer4').unbind('click');
+           //                $('#answer4').unbind('dblclick');
+
+           //                CheckifAnswered($('#questionid').val());
+           //                $('#notification').modal('show');
+           //                $('#myModalLabel1').text('Ooopps ! Better Luck next Time!');
+           //                $('#gtra').text('You Choose the Wrong Answer');
+           //                ans = '';
+           //                CheckifAnswered($('#questionid').val());
+           //            }
+           //            else {
+
+           //                killInterval();
+           //                UpdateCorrect();
+           //            }
+           //        },
+           //        error: function AjaxError(response) { alert(response.status + ' ' + response.responseText); },
+           //        failure: function AjaxFailure(response) { response.status + ' ' + response.statusText; }
+           //    });
+           //};
 
 
 
@@ -786,20 +831,21 @@
 
             function AjaxSucceeded(response) {
                 //SUCESS SUCCESS
-                if ($('#questionid').val() == '0' || $('#questionid').val() == '') {
-                    CheckifAnswered($('#questionid').val());
-                }
-                else {
-                    $('#notification').modal('show');
-                    $('#myModalLabel1').text('Congratulations!..');
-                    $('#meid1').text('You');
-                    $('#gtra').text('Got the right Answer');
-                    $('#meid2').text(' + ' + $('#points').val() + ' Points');
-                    refreshquestionform();
-                    killInterval();
-                    $('#errormes').text('');
-                    validatequestion();
-                }
+                alert('1');
+                //if ($('#questionid').val() == '0' || $('#questionid').val() == '') {
+                //    CheckifAnswered($('#questionid').val());
+                //}
+                //else {
+                //    $('#notification').modal('show');
+                //    $('#myModalLabel1').text('Congratulations!..');
+                //    $('#meid1').text('You');
+                //    $('#gtra').text('Got the right Answer');
+                //    $('#meid2').text(' + ' + $('#points').val() + ' Points');
+                //    refreshquestionform();
+                //    killInterval();
+                //    $('#errormes').text('');
+                //    validatequestion();
+                //}
 
 
             }

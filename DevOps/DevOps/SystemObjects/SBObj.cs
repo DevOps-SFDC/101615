@@ -270,6 +270,7 @@ namespace DevOps.SystemObjects
             return dt = this.FGetDataTable(@"[SBDisplayChoices]", oParam);
         }
 
+
         public DataTable CheckAnswer()
         {
             DataTable dt = new DataTable();
@@ -278,24 +279,15 @@ namespace DevOps.SystemObjects
             oParam.AddWithValue("@guestanswer", _guestanswer);
             return dt = this.FGetDataTable(@"SBCheckAnswer", oParam);
         }
-        //public string CheckAnswer()
+        //public DataTable CheckAnswer()
         //{
-        //    string msg;
+        //    DataTable dt = new DataTable();
         //    var oParam = new SqlCommand().Parameters;
         //    oParam.AddWithValue("@questionid", _questionid);
         //    oParam.AddWithValue("@guestanswer", _guestanswer);
-        //    try
-        //    {
-        //        this.ExecuteInsert(@"SBCheckAnswer", oParam);
-        //        msg = "Updated!";
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        msg = ex.ToString();
-        //    }
-
-        //    return msg;
+        //    return dt = this.FGetDataTable(@"SBCheckAnswer", oParam);
         //}
+
 
 
 
@@ -549,6 +541,13 @@ namespace DevOps.SystemObjects
             }
 
             return msg;
+        }
+
+        public DataTable DisplayLeaderBoard()
+        {
+            DataTable dt = new DataTable();
+            var oParam = new SqlCommand().Parameters;
+            return dt = this.FGetDataTable(@"SBDisplayLeaderBoard", oParam);
         }
         #endregion
 

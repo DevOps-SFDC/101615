@@ -99,5 +99,24 @@ namespace DevOps
 
             return _sbobj.InsertChat();
         }
+
+        [System.Web.Services.WebMethodAttribute(), System.Web.Script.Services.ScriptMethodAttribute()]
+        public static string displayLeaderBoard(List<string> _arr)
+        {
+            DataTable dummy = new DataTable();
+
+            SBObj _sbobj = new SBObj();
+            DataSet ds = new DataSet();
+            try
+            {
+                dummy.Merge(_sbobj.DisplayLeaderBoard());
+                ds.Tables.Add(dummy);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return ds.GetXml();
+        }
     }
 }
