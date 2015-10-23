@@ -91,15 +91,6 @@
 
         <div class="row" style="margin-top: 15px;"></div>
 
-        <!--<div class="flip-container">
-	        <div class="flipper">
-		        <div class="front">FRONT
-		        </div>
-		        <div class="back">
-		        </div>
-	        </div>
-        </div>-->
-
         <label class="text-center pull-right" id="timer" style="font: bold 16px arial, verdana;">0:30 second</label><label class="text-center pull-right">Countdown:&nbsp;</label>
 
         <div class="row">
@@ -108,17 +99,11 @@
         </div>
 
         <div id="questionform" class="panel panel-body well well-lg questionContainer">
-            <!--<div class="col-xs-12 qbtopline" style="background: rgba(241, 196, 15,1.0); padding: 0px; height: 10px"></div>-->
             <div class="col-xs-12" style="padding: 0px; box-shadow: rgba(0, 0, 0, 0.30) 0px 1px 1px; display: inline-block;">
                 <div class="col-md-12" style="background: rgba(44, 62, 80,1.0); color: #FFF; font-family: 'Open Sans',serif; padding-bottom: 15px; width: 100%">
                     <h1 style="display: inline-block"><i class="fa fa-pencil"></i>Online Quiz Bee</h1>
-<%--                    <div class="qbbtn" id="guestsubmitt" style="float: right; margin-top: 15px; width: 90px; height: 50px; text-align: center">
-                        <button type="button" class="btn btn-success qbbtnsubmit" id="guestsubmit" style="height: 50px; width: 90px"><span class="qbbtnsubmittxt">Submit</span></button>
-                    </div>--%>
                 </div>
             </div>
-
-            <%--<input type="hidden" id="correctanswer"/>--%>
 
             <div class="col-xs-12" style="margin-top: 10px;">
                 <div class="col-md-6">
@@ -257,30 +242,6 @@
         function loader(sender, args) {
             $(document).ready(function () {
                 var val = '';
-                //$('#guestanswer').on("keyup", function () {
-                //    console.log($('#guestanswer').val());
-                //    if ($('#guestanswer').val() == '\n')
-                //        console.log("ENTERED");
-                //});
-                /*$('.qbbtnsubmit').hover(function () {
-                    $('.qbbtnsubmittxt').remove();
-                    $('.qbbtnsubmit').animate({ borderRadius: '50%', width: '50px' }, "fast");
-                    $('.qbbtnsubmit').append('<i class="fa fa-check fa-2x qbbtnsubmittxt"></i>');
-                }, function () {
-                    $('.qbbtnsubmittxt').remove();
-                    $('.qbbtnsubmit').animate({ borderRadius: '4px', width: '90px' }, "fast");
-                    $('.qbbtnsubmit').append('<span class="qbbtnsubmittxt">Submit</span>');
-                });
-                */
-                //$('.qbbtn').hover(function () {
-                //    $('.qbbtnsubmit').remove();
-                //    $('.qbbtn').append('<button type="button" class="btn btn-success qbbtnsubmit" id="guestsubmit" style="border-radius: 50%; height: 50px; width: 50px"><i class="fa fa-check fa-2x qbbtnsubmittxt"></i></button>');
-                //}, function () {
-                //    $('.qbbtnsubmit').remove();
-                //    $('.qbbtn').append('<button type="button" class="btn btn-success qbbtnsubmit" id="guestsubmit" style="height: 50px; width: 90px"><span class="qbbtnsubmittxt">Submit</span></button>');
-                //});
-
-
                 if ('<%: Session["Type"]%>' == 'Administrator') {
                     alert('You are not Authorized to use this Tool!..');
                     window.location.href = "/Default.aspx";
@@ -289,12 +250,13 @@
                     $('#questionid').val(0);
 
                     refreshquestionform();
-                    setInterval(LoadQuestdummyid, 100);
-                    setInterval(CheckdbAnswered, 100);
+
                     $('#answer1').disableSelection();
                     $('#answer2').disableSelection();
                     $('#answer3').disableSelection();
                     $('#answer4').disableSelection();
+                    CheckQuizStatus();
+
                 }
             });
         };
@@ -336,7 +298,6 @@
             $('#points').val('');
             $('#difficulty').val('');
             $('#timer').val('');
-            //$('#guestsubmit')[0].disabled = true;
             $('#answer1').text('');
             $('#answer2').text('');
             $('#answer3').text('');
@@ -356,6 +317,50 @@
             $('#answer4').unbind('click');
             $('#answer4').unbind('dblclick');
         }
+
+
+
+        function CheckQuizStatus() {
+            var arr = new Array();
+            arr[0] = 1;
+
+               $.ajax({
+                   type: "POST",
+                   url: "UserSB.aspx/checkQuizStatus",
+                   data: JSON.stringify({ _arr: arr }),
+                   contentType: "application/json; charset=utf-8",
+                   dataType: "json",
+                   success: function AjaxSucceded(response) {
+                       var xmlDoc = $.parseXML(response.d);
+                       var xml = $(xmlDoc);
+                       var details = xml.find("Table1");
+                       $.each(details, function () {
+                           var metrics = $(this);
+                           if ($(this).find("sessionstatus").text() == 'Inactive') {
+                               setInterval(LoadQuestdummyid, 500);
+                           }
+                           else {
+                               LoadQuestionIDforNewinRoom($('#questionid').val());
+                               setInterval(CheckdbifnotAnsweredd, 500);
+                               setInterval(CheckdbAnswered, 500);
+                           }
+                       });
+
+                   },
+                   error: function AjaxError(response) {
+                       //alert(response.status + ' ' + response.responseText);
+                   },
+                   failure: function AjaxFailure(response) {
+                       //response.status + ' ' + response.statusText;
+                   }
+               })
+           }
+
+
+
+
+
+
         function CheckdbAnswered() {
             CheckifAnswered($('#questionid').val());
         };
@@ -364,6 +369,10 @@
 
             //$('#meid2').text('+ ' + $('#points').text() + ' Points')
         };
+
+
+
+
 
         function CheckifAnswered(questid) {
             $.ajax({
@@ -389,12 +398,8 @@
                         refreshquestionform();
                         killInterval();
                         validatequestion();
-                        //showmodalYGTRA();
                     }
                     else {
-                        //alert('2');
-                        //clearnotifmodal();
-                        //$('#notification').modal('hide');
                         $('#questionid').val(0);
                         refreshquestionform();
                         killInterval();
@@ -404,7 +409,8 @@
                         $('#meid1').text($(this).find("EID").text());
                         $('#gtra').text('Got the right Answer');
                         $('#meid2').text(' + ' + $(this).find("Points").text() + ' Points for ' + $(this).find("EID").text());
-
+                        setInterval(LoadQuestdummyid, 500);
+                        UpdateQuizbeeStatusI();
                     }
                 });
             };
@@ -451,33 +457,6 @@
                clearInterval(timer);
 
            };
-           //function timerstart() {
-           //    var min = 1;
-           //    var sec = 59;
-           //    $('#guestanswer').focus();
-           //    timer = setInterval(function () {
-
-           //        document.getElementById("timer").innerHTML = "  " + min + ":" + sec;
-           //        sec--;
-           //        if (sec == 00) {
-           //            min--;
-           //            sec = 60;
-           //            if (min == -1) {
-
-           //                min = 1;
-           //                sec = 59;
-
-           //                killInterval();
-           //                UpdateQuestionaireNotAnswered();
-           //                AlertCorrectAnswer($('#questionid').val());
-           //                refreshquestionform();
-           //                $('#timer').text('2:00');
-           //            }
-
-
-           //        }
-           //    }, 1000);
-           //};
 
 
            //Alert Correct Answer
@@ -501,12 +480,15 @@
                        //UpdateQuestionaireNotAnswered();
                        validatequestion();
                        killInterval();
-
+                       setInterval(CheckdbAnswered, 5000000);
+                       setInterval(LoadQuestdummyid, 500);
                        $('#timer').text('0:30 second');
                        $('#notification').modal('show');
+                       $('#meid1').text('');
                        $('#myModalLabel1').text('Times UP!..');
                        $('#gtra').text('The Correct Answer is');
                        $('#meid2').text($(this).find("CorrectAnswer").text());
+                       UpdateQuizbeeStatusI();
 
                    });
                };
@@ -535,12 +517,10 @@
                });
 
                function AjaxSucceeded(response) {
-                   //SUCESS SUCCESS
-                   //$('#questionid').val(0);
-                   //killInterval();
+
                    refreshquestionform();
                    validatequestion();
-
+                   UpdateQuizbeeStatusI();
                };
                function AjaxError(response) {
                    //alert(response.status + ' ' + response.statusText);
@@ -583,7 +563,9 @@
                            $('#question').val($(this).find("Question").text());
                            $('#difficulty').val($(this).find("Difficulty").text());
                            $('#points').val($(this).find("Point").text());
-                           //$('#guestsubmit')[0].disabled = false;
+                           setInterval(LoadQuestdummyid, 5000000);
+                           setInterval(CheckdbAnswered, 500);
+                           UpdateQuizbeeStatus();
                        }
 
 
@@ -613,6 +595,7 @@
                        $('#countdowntimer').val('5');
                        $('#countdowntostart').modal('hide');
                        LoadChoices($('#questionid').val());
+
 
                        validatequestion();
 
@@ -723,6 +706,7 @@
                var arr = new Array();
                arr[0] = $('#questionid').val();
                arr[1] = ans;
+               arr[2] = '<%: Session["lanid"] %>'
 
                $.ajax({
                    type: "POST",
@@ -738,9 +722,18 @@
                            var metrics = $(this);
                            //alert($(this).find("Answer").text());
                            if (ans == $(this).find("Answer").text()) {
-                               UpdateCorrect();
+                               //UpdateCorrect();
+                               $('#notification').modal('show');
+                               $('#myModalLabel1').text('Congratulations!..');
+                               $('#meid1').text('You');
+                               $('#gtra').text('Got the right Answer');
+                               $('#meid2').text(' + ' + $('#points').val() + ' Points');
+                               refreshquestionform();
+                               killInterval();
+                               validatequestion();
+                               UpdateQuizbeeStatusI();
                            }
-                           else {
+                           else if ($(this).find("Answer").text() == 'Wrong') {
                                $('#answer1').unbind('click');
                                $('#answer1').unbind('dblclick');
                                $('#answer2').unbind('click');
@@ -751,9 +744,14 @@
                                $('#answer4').unbind('dblclick');
 
                                $('#notification').modal('show');
+                               $('#meid1').text('');
                                $('#myModalLabel1').text('Ooopps ! Better Luck next Time!');
                                $('#gtra').text('You Choose the Wrong Answer');
+                               $('#meid2').text('');
                                ans = '';
+                           }
+                           else if ($(this).find("Answer").text() == 'Someone') {
+                               CheckdbAnswered();
                            }
                        });
 
@@ -764,63 +762,12 @@
            }
 
 
-           //function CheckAnswer() {
-           //    var arr = new Array();
-           //    arr[0] = $('#questionid').val();
-           //    arr[1] = ans;
-           //    $.ajax({
-           //        type: "POST",
-           //        url: "UserSB.aspx/checkAnswer",
-           //        data: JSON.stringify({ _arr: arr }),
-           //        contentType: "application/json; charset=utf-8",
-           //        dataType: "json",
-           //        success: function AjaxSucceded(response) {
-           //            var xmlDoc = $.parseXML(response.d);
-           //            var xml = $(xmlDoc);
-           //            var parents = xml.find("Table1");
-           //            //UpdateCorrect();
-           //            //alert($(this).find("LogNo").text());
-           //            if (response.d == '<NewDataSet />') {
-           //                $('#answer1').unbind('click');
-           //                $('#answer1').unbind('dblclick');
-           //                $('#answer2').unbind('click');
-           //                $('#answer2').unbind('dblclick');
-           //                $('#answer3').unbind('click');
-           //                $('#answer3').unbind('dblclick');
-           //                $('#answer4').unbind('click');
-           //                $('#answer4').unbind('dblclick');
-
-           //                CheckifAnswered($('#questionid').val());
-           //                $('#notification').modal('show');
-           //                $('#myModalLabel1').text('Ooopps ! Better Luck next Time!');
-           //                $('#gtra').text('You Choose the Wrong Answer');
-           //                ans = '';
-           //                CheckifAnswered($('#questionid').val());
-           //            }
-           //            else {
-
-           //                killInterval();
-           //                UpdateCorrect();
-           //            }
-           //        },
-           //        error: function AjaxError(response) { alert(response.status + ' ' + response.responseText); },
-           //        failure: function AjaxFailure(response) { response.status + ' ' + response.statusText; }
-           //    });
-           //};
-
-
-
-
-
-           //Update Questionaire if Correct
-           function UpdateCorrect() {
-               var arr = new Array();
-               arr[0] = $('#questionid').val();
-               arr[1] = ans;
-               arr[2] = '<%: Session["lanid"] %>'
+        function UpdateQuizbeeStatus() {
+            var arr = new Array();
+            arr[0] = 1;
             $.ajax({
                 type: "POST",
-                url: "UserSB.aspx/updateCorrect",
+                url: "UserSB.aspx/updateQuizbeeStatus",
                 data: JSON.stringify({ _arr: arr }),
                 contentType: "application/json; charset=utf-8",
                 dataTaype: "json",
@@ -830,27 +777,108 @@
             });
 
             function AjaxSucceeded(response) {
-                //SUCESS SUCCESS
-                alert('1');
-                //if ($('#questionid').val() == '0' || $('#questionid').val() == '') {
-                //    CheckifAnswered($('#questionid').val());
-                //}
-                //else {
-                //    $('#notification').modal('show');
-                //    $('#myModalLabel1').text('Congratulations!..');
-                //    $('#meid1').text('You');
-                //    $('#gtra').text('Got the right Answer');
-                //    $('#meid2').text(' + ' + $('#points').val() + ' Points');
-                //    refreshquestionform();
-                //    killInterval();
-                //    $('#errormes').text('');
-                //    validatequestion();
-                //}
 
 
             }
             function AjaxError(response) {
-                //alert('Your Answer is not Correct');
+                //alert(response.status + ' ' + response.statusText);
+            }
+            function AjaxFailure(response) {
+                //alert(response.status + ' ' + response.statusText);
+            }
+        }
+
+        function UpdateQuizbeeStatusI() {
+            var arr = new Array();
+            arr[0] = 1;
+            $.ajax({
+                type: "POST",
+                url: "UserSB.aspx/updateQuizbeeStatusI",
+                data: JSON.stringify({ _arr: arr }),
+                contentType: "application/json; charset=utf-8",
+                dataTaype: "json",
+                success: AjaxSucceeded,
+                error: AjaxError,
+                failure: AjaxFailure
+            });
+
+            function AjaxSucceeded(response) {
+
+
+            }
+            function AjaxError(response) {
+                //alert(response.status + ' ' + response.statusText);
+            }
+            function AjaxFailure(response) {
+                //alert(response.status + ' ' + response.statusText);
+            }
+        }
+
+        function LoadQuestionIDforNewinRoom(questid) {
+            $.ajax({
+                type: "POST",
+                url: "UserSB.aspx/loadQuestionIDforNewinRoom",
+                data: '{questid: ' + questid + '}',
+                contentType: "application/json; charset=utf-8",
+                dataTaype: "json",
+                success: AjaxSucceeded,
+                error: AjaxError,
+                failure: AjaxFailure
+            });
+            function AjaxSucceeded(response) {
+                var xmlDoc = $.parseXML(response.d);
+                var xml = $(xmlDoc);
+                var exkeys = xml.find("Table1");
+                $.each(exkeys, function () {
+
+                    $('#questionid').val($(this).find("QuestionID").text());
+
+
+                });
+            };
+            function AjaxError(response) {
+                //alert(response.status + ' ' + response.statusText);
+            };
+            function AjaxFailure(response) {
+                //alert(response.status + ' ' + response.statusText);
+            };
+        };
+
+
+        function CheckdbifnotAnsweredd() {
+            CheckifnotAnswered($('#questionid').val());
+        }
+
+        function CheckifnotAnswered(questid) {
+
+            $.ajax({
+                type: "POST",
+                url: "UserSB.aspx/checkifnotAnswered",
+                data: '{questid: ' + questid + '}',
+                contentType: "application/json; charset=utf-8",
+                dataTaype: "json",
+                success: AjaxSucceeded,
+                error: AjaxError,
+                failure: AjaxFailure
+            });
+            function AjaxSucceeded(response) {
+                var xmlDoc = $.parseXML(response.d);
+                var xml = $(xmlDoc);
+                var exkeys = xml.find("Table1");
+                $.each(exkeys, function () {
+                    if ($('#questionid').val() == $(this).find("QuestionID").text()) {
+                        refreshquestionform();
+                        setInterval(CheckdbAnswered, 5000000);
+                        setInterval(LoadQuestdummyid, 500);
+                        UpdateQuizbeeStatusI();
+                    }
+                    else {
+
+                    }
+
+                });
+            }
+            function AjaxError(response) {
                 //alert(response.status + ' ' + response.statusText);
             }
             function AjaxFailure(response) {

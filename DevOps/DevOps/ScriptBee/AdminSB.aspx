@@ -184,7 +184,8 @@
                     $('#questionid').val(0);
                     DisplayQuestionaires();
                     refreshquestionform()
-                    setInterval(CheckdbAnswered, 100);
+                    setInterval(CheckdbAnswered, 500);
+                    setInterval(CheckdbifnotAnsweredd, 500);
                 }
             })
         }
@@ -362,6 +363,52 @@
                     alert($(this).find("EID").text() + '\n Got the right answer on Question ID \n' + $(this).find("QuestionID").text() + '\n + ' + $(this).find("Points").text());
                     refreshquestionform();
                     DisplayQuestionaires();
+
+                });
+            }
+            function AjaxError(response) {
+                //alert(response.status + ' ' + response.statusText);
+            }
+            function AjaxFailure(response) {
+                //alert(response.status + ' ' + response.statusText);
+            }
+        }
+
+
+        function CheckdbifnotAnsweredd() {
+            CheckifnotAnswered($('#questionid').val());
+        }
+
+        function CheckifnotAnswered(questid) {
+
+            $.ajax({
+                type: "POST",
+                url: "AdminSB.aspx/checkifnotAnswered",
+                data: '{questid: ' + questid + '}',
+                contentType: "application/json; charset=utf-8",
+                dataTaype: "json",
+                success: AjaxSucceeded,
+                error: AjaxError,
+                failure: AjaxFailure
+            });
+            function AjaxSucceeded(response) {
+                var xmlDoc = $.parseXML(response.d);
+                var xml = $(xmlDoc);
+                var exkeys = xml.find("Table1");
+                $.each(exkeys, function () {
+                    if ($('#questionid').val() == $(this).find("QuestionID").text()) {
+                        $('#questionid').val(0);
+                        alert('No One Got the Right Answer!..\n Please Load a Question Again!..');
+                        refreshquestionform();
+                        DisplayQuestionaires();
+                    }
+                    else {
+                        
+                    }
+                    //$('#questionid').val(0);
+                    //alert('No One Got the Right Answer!..\n Please Load a Question Again!..');
+                    //refreshquestionform();
+                    //DisplayQuestionaires();
 
                 });
             }

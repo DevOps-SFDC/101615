@@ -277,6 +277,7 @@ namespace DevOps.SystemObjects
             var oParam = new SqlCommand().Parameters;
             oParam.AddWithValue("@questionid", _questionid);
             oParam.AddWithValue("@guestanswer", _guestanswer);
+            oParam.AddWithValue("@eid", _eid);
             return dt = this.FGetDataTable(@"SBCheckAnswer", oParam);
         }
         //public DataTable CheckAnswer()
@@ -287,7 +288,13 @@ namespace DevOps.SystemObjects
         //    oParam.AddWithValue("@guestanswer", _guestanswer);
         //    return dt = this.FGetDataTable(@"SBCheckAnswer", oParam);
         //}
-
+        public DataTable CheckQuizStatus()
+        {
+            DataTable dt = new DataTable();
+            var oParam = new SqlCommand().Parameters;
+            oParam.AddWithValue("@questionid", _questionid);
+            return dt = this.FGetDataTable(@"SBCheckQuizStatus", oParam);
+        }
 
 
 
@@ -317,6 +324,14 @@ namespace DevOps.SystemObjects
             var oParam = new SqlCommand().Parameters;
             oParam.AddWithValue("@questionid", _questionid);
             return dt = this.FGetDataTable(@"SBCheckifAnswered", oParam);
+        }
+
+        public DataTable CheckifnotAnswered()
+        {
+            DataTable dt = new DataTable();
+            var oParam = new SqlCommand().Parameters;
+            oParam.AddWithValue("@questionid", _questionid);
+            return dt = this.FGetDataTable(@"SBCheckifnotAnswered", oParam);
         }
 
 
@@ -548,6 +563,49 @@ namespace DevOps.SystemObjects
             DataTable dt = new DataTable();
             var oParam = new SqlCommand().Parameters;
             return dt = this.FGetDataTable(@"SBDisplayLeaderBoard", oParam);
+        }
+
+        public string UpdateQuizbeeStatus()
+        {
+            string msg;
+            var oParam = new SqlCommand().Parameters;
+            oParam.AddWithValue("@questionid", _questionid);
+            try
+            {
+                this.ExecuteInsert(@"TBUpdateQuizbeeStatusA", oParam);
+                msg = "Saved!";
+            }
+            catch (Exception ex)
+            {
+                msg = ex.ToString();
+            }
+
+            return msg;
+        }
+        public string UpdateQuizbeeStatusI()
+        {
+            string msg;
+            var oParam = new SqlCommand().Parameters;
+            oParam.AddWithValue("@questionid", _questionid);
+            try
+            {
+                this.ExecuteInsert(@"TBUpdateQuizbeeStatusI", oParam);
+                msg = "Saved!";
+            }
+            catch (Exception ex)
+            {
+                msg = ex.ToString();
+            }
+
+            return msg;
+        }
+
+        public DataTable LoadQuestionIDforNewinRoom()
+        {
+            DataTable dt = new DataTable();
+            var oParam = new SqlCommand().Parameters;
+            oParam.AddWithValue("@questionid", _questionid);
+            return dt = this.FGetDataTable(@"SBLoadQuestionIDforNewinRoom", oParam);
         }
         #endregion
 

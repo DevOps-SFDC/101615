@@ -106,22 +106,24 @@ namespace DevOps.ScriptBee
             return ds.GetXml();
         }
 
-        //[System.Web.Services.WebMethodAttribute(), System.Web.Script.Services.ScriptMethodAttribute()]
-        //public static string checkifAnswered(Int32 questid)
-        //{
-        //    SBObj _sbobj = new SBObj();
-        //    _sbobj.QuestionID = questid;
-        //    DataSet ds = new DataSet();
-        //    try
-        //    {
-        //        ds.Tables.Add(_sbobj.CheckifAnswered());
-        //    }
-        //    catch (Exception ex)
-        //    {
+        [System.Web.Services.WebMethodAttribute(), System.Web.Script.Services.ScriptMethodAttribute()]
+        public static string checkifnotAnswered(Int32 questid)
+        {
+            SBObj _sbobj = new SBObj();
+            _sbobj.QuestionID = questid;
+            DataSet ds = new DataSet();
+            try
+            {
+                ds.Tables.Add(_sbobj.CheckifnotAnswered());
+            }
+            catch (Exception ex)
+            {
 
-        //    }
-        //    return ds.GetXml();
-        //}
+            }
+            return ds.GetXml();
+        }
+
+
 
     }
 }

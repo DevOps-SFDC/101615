@@ -26,6 +26,27 @@ namespace DevOps.ScriptBee
 
         }
 
+
+        [System.Web.Services.WebMethodAttribute(), System.Web.Script.Services.ScriptMethodAttribute()]
+        public static string checkQuizStatus(List<string> _arr)
+        {
+            DataTable dummy = new DataTable();
+
+            SystemObjects.SBObj _sbobj = new SystemObjects.SBObj();
+            _sbobj.QuestionID = Convert.ToInt32(_arr[0]);
+            DataSet ds = new DataSet();
+            try
+            {
+                dummy.Merge(_sbobj.CheckQuizStatus());
+                ds.Tables.Add(dummy);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return ds.GetXml();
+        }
+
         [System.Web.Services.WebMethodAttribute(), System.Web.Script.Services.ScriptMethodAttribute()]
         public static string loadActiveQuestion(Int32 questid)
         {
@@ -96,6 +117,7 @@ namespace DevOps.ScriptBee
             SystemObjects.SBObj _sbobj = new SystemObjects.SBObj();
             _sbobj.QuestionID = Convert.ToInt32(_arr[0]);
             _sbobj.GuestAnswer = _arr[1].ToString();
+            _sbobj.EID = _arr[2].ToString();
             DataSet ds = new DataSet();
             try
             {
@@ -162,5 +184,55 @@ namespace DevOps.ScriptBee
             return ds.GetXml();
         }
 
+        [System.Web.Services.WebMethodAttribute(), System.Web.Script.Services.ScriptMethodAttribute()]
+        public static string updateQuizbeeStatus(List<string> _arr)
+        {
+            SBObj _sbobj = new SBObj();
+
+            _sbobj.QuestionID = Convert.ToInt32(_arr[0].ToString());
+            return _sbobj.UpdateQuizbeeStatus();
+        }
+        [System.Web.Services.WebMethodAttribute(), System.Web.Script.Services.ScriptMethodAttribute()]
+        public static string updateQuizbeeStatusI(List<string> _arr)
+        {
+            SBObj _sbobj = new SBObj();
+
+            _sbobj.QuestionID = Convert.ToInt32(_arr[0].ToString());
+            return _sbobj.UpdateQuizbeeStatusI();
+        }
+
+        [System.Web.Services.WebMethodAttribute(), System.Web.Script.Services.ScriptMethodAttribute()]
+        public static string loadQuestionIDforNewinRoom(Int32 questid)
+        {
+            SBObj _sbobj = new SBObj();
+            _sbobj.QuestionID = questid;
+            DataSet ds = new DataSet();
+            try
+            {
+                ds.Tables.Add(_sbobj.LoadQuestionIDforNewinRoom());
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return ds.GetXml();
+        }
+
+        [System.Web.Services.WebMethodAttribute(), System.Web.Script.Services.ScriptMethodAttribute()]
+        public static string checkifnotAnswered(Int32 questid)
+        {
+            SBObj _sbobj = new SBObj();
+            _sbobj.QuestionID = questid;
+            DataSet ds = new DataSet();
+            try
+            {
+                ds.Tables.Add(_sbobj.CheckifnotAnswered());
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return ds.GetXml();
+        }
     }
 }
