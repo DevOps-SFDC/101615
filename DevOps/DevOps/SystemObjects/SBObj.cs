@@ -496,6 +496,14 @@ namespace DevOps.SystemObjects
             return dt = this.FGetDataTable(@"SBTop1", oParam);
         }
 
+        public DataTable LoadTop3Users()
+        {
+            DataTable dt = new DataTable();
+            var oParam = new SqlCommand().Parameters;
+            oParam.AddWithValue("@userno", _userno);
+            return dt = this.FGetDataTable(@"SBTop3Users", oParam);
+        }
+
         public DataTable LoadTop2()
         {
             DataTable dt = new DataTable();
@@ -606,6 +614,33 @@ namespace DevOps.SystemObjects
             var oParam = new SqlCommand().Parameters;
             oParam.AddWithValue("@questionid", _questionid);
             return dt = this.FGetDataTable(@"SBLoadQuestionIDforNewinRoom", oParam);
+        }
+
+
+        public string UpdateUserSBStatus()
+        {
+            string msg;
+            var oParam = new SqlCommand().Parameters;
+            oParam.AddWithValue("@eid", _eid);
+            try
+            {
+                this.ExecuteInsert(@"SBCheckUserSBStatus", oParam);
+                msg = "Saved!";
+            }
+            catch (Exception ex)
+            {
+                msg = ex.ToString();
+            }
+
+            return msg;
+        }
+
+        public DataTable CheckifQuizBeeStatusisActive()
+        {
+            DataTable dt = new DataTable();
+            var oParam = new SqlCommand().Parameters;
+            oParam.AddWithValue("@eid", _eid);
+            return dt = this.FGetDataTable(@"SBActiveQuizBee", oParam);
         }
         #endregion
 

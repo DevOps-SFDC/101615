@@ -143,12 +143,14 @@
 
             <div class="col-xs-12">
                 <div class="col-md-6" style="padding-top: 5%; padding-bottom: 10%;">
-                    <span id="answer1" style="text-align:center; display:block; padding-bottom: 5%; padding-top: 5%; color:black; background-color:darkorange;"></span><br />
-                    <span id="answer2" style="text-align:center; display:block; padding-bottom: 5%; padding-top: 5%; color:black; background-color:darkorange;"></span>
+                    <span id="answer1" style="text-align: center; display: block; padding-bottom: 5%; padding-top: 5%; color: black; background-color: darkorange;"></span>
+                    <br />
+                    <span id="answer2" style="text-align: center; display: block; padding-bottom: 5%; padding-top: 5%; color: black; background-color: darkorange;"></span>
                 </div>
                 <div class="col-md-6" style="padding-top: 5%; padding-bottom: 10%;">
-                    <span id="answer3" style="text-align:center; display:block; padding-bottom: 5%; padding-top: 5%; color:black; background-color:darkorange;"></span><br />
-                    <span id="answer4" style="text-align:center; display:block; padding-bottom: 5%; padding-top: 5%; color:black; background-color:darkorange;"></span>
+                    <span id="answer3" style="text-align: center; display: block; padding-bottom: 5%; padding-top: 5%; color: black; background-color: darkorange;"></span>
+                    <br />
+                    <span id="answer4" style="text-align: center; display: block; padding-bottom: 5%; padding-top: 5%; color: black; background-color: darkorange;"></span>
                     <%--<textarea style="resize: none; height: 150px; margin-bottom: 20px" class="form-control" id="guestanswer" rows="5" placeholder="What is the answer?"></textarea>--%>
                 </div>
             </div>
@@ -232,6 +234,7 @@
         prm.add_endRequest(ender);
         prm.add_pageLoaded(loader);
 
+
         function initializer(sender, args) {
 
         }
@@ -248,18 +251,145 @@
                 }
                 else if ('<%: Session["Type"]%>' == 'User'); {
                     $('#questionid').val(0);
+                    CheckifQuizBeeStatusisActive();
 
-                    refreshquestionform();
+                    //refreshquestionform();
 
-                    $('#answer1').disableSelection();
-                    $('#answer2').disableSelection();
-                    $('#answer3').disableSelection();
-                    $('#answer4').disableSelection();
-                    CheckQuizStatus();
+                    //$('#answer1').disableSelection();
+                    //$('#answer2').disableSelection();
+                    //$('#answer3').disableSelection();
+                    //$('#answer4').disableSelection();
+                    //CheckQuizStatus();
 
-                }
+
+
+
+                                                   
+
+
+
+                 }
             });
         };
+
+
+
+           function CheckifQuizBeeStatusisActive() {
+               var arr = new Array();
+               arr[0] = '<%: Session["lanid"] %>'
+
+               $.ajax({
+                   type: "POST",
+                   url: "UserSB.aspx/checkifQuizBeeStatusisActive",
+                   data: JSON.stringify({ _arr: arr }),
+                   contentType: "application/json; charset=utf-8",
+                   dataType: "json",
+                   success: function AjaxSucceded(response) {
+                       var xmlDoc = $.parseXML(response.d);
+                       var xml = $(xmlDoc);
+                       var details = xml.find("Table1");
+                       $.each(details, function () {
+                           var metrics = $(this);
+
+                           //alert($(this).find("Answer").text());
+                           if ($(this).find("Answer").text() == 'UserSB') {
+                               alert('A Quiz Bee Page is already open in one of your browser \nPlease check your browser!..');
+                               window.location.href = "/Default.aspx";
+                           }
+                           else if ($(this).find("Answer").text() == 'UserSB2'){
+                               
+                              refreshquestionform();
+
+                               $('#answer1').disableSelection();
+                               $('#answer2').disableSelection();
+                               $('#answer3').disableSelection();
+                               $('#answer4').disableSelection();
+                               CheckQuizStatus();
+
+
+
+
+
+
+                    $(window).bind('beforeunload', function () {
+                        var arr = new Array();
+                        arr[1] = '<%: Session["lanid"] %>';
+                                                $.ajax({
+                                                    type: "POST",
+                                                    url: "UserSB.aspx/updateUserSBStatus",
+                                                    data: JSON.stringify({ _arr: arr }),
+                                                    contentType: "application/json; charset=utf-8",
+                                                    dataTaype: "json",
+                                                    success: AjaxSucceeded,
+                                                    error: AjaxError,
+                                                    failure: AjaxFailure
+                                                });
+
+                                                function AjaxSucceeded(response) {
+
+
+                                                }
+                                                function AjaxError(response) {
+                                                }
+                                                function AjaxFailure(response) {
+                                                }
+                    });
+
+                    $(window).bind('unload', function () {
+                        var arr = new Array();
+                        arr[1] = '<%: Session["lanid"] %>';
+                                                $.ajax({
+                                                    type: "POST",
+                                                    url: "UserSB.aspx/updateUserSBStatus",
+                                                    data: JSON.stringify({ _arr: arr }),
+                                                    contentType: "application/json; charset=utf-8",
+                                                    dataTaype: "json",
+                                                    success: AjaxSucceeded,
+                                                    error: AjaxError,
+                                                    failure: AjaxFailure
+                                                });
+
+                                                function AjaxSucceeded(response) {
+
+
+                                                }
+                                                function AjaxError(response) {
+                                                    //alert(response.status + ' ' + response.statusText);
+                                                }
+                                                function AjaxFailure(response) {
+                                                    //alert(response.status + ' ' + response.statusText);
+                                                }
+                    });
+
+
+
+
+
+                           }
+                       });
+
+                   },
+                   error: function AjaxError(response) {
+                       //alert(response.status + ' ' + response.responseText);
+                   },
+                   failure: function AjaxFailure(response) {
+                       //response.status + ' ' + response.statusText;
+                   }
+               })
+           }
+
+
+
+
+
+
+                                                   ///unload and close update status
+
+
+
+
+
+
 
 
         $('#notification').keydown(function (e) {
@@ -324,37 +454,37 @@
             var arr = new Array();
             arr[0] = 1;
 
-               $.ajax({
-                   type: "POST",
-                   url: "UserSB.aspx/checkQuizStatus",
-                   data: JSON.stringify({ _arr: arr }),
-                   contentType: "application/json; charset=utf-8",
-                   dataType: "json",
-                   success: function AjaxSucceded(response) {
-                       var xmlDoc = $.parseXML(response.d);
-                       var xml = $(xmlDoc);
-                       var details = xml.find("Table1");
-                       $.each(details, function () {
-                           var metrics = $(this);
-                           if ($(this).find("sessionstatus").text() == 'Inactive') {
-                               setInterval(LoadQuestdummyid, 500);
-                           }
-                           else {
-                               LoadQuestionIDforNewinRoom($('#questionid').val());
-                               setInterval(CheckdbifnotAnsweredd, 500);
-                               setInterval(CheckdbAnswered, 500);
-                           }
-                       });
+            $.ajax({
+                type: "POST",
+                url: "UserSB.aspx/checkQuizStatus",
+                data: JSON.stringify({ _arr: arr }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function AjaxSucceded(response) {
+                    var xmlDoc = $.parseXML(response.d);
+                    var xml = $(xmlDoc);
+                    var details = xml.find("Table1");
+                    $.each(details, function () {
+                        var metrics = $(this);
+                        if ($(this).find("sessionstatus").text() == 'Inactive') {
+                            setInterval(LoadQuestdummyid, 500);
+                        }
+                        else {
+                            LoadQuestionIDforNewinRoom($('#questionid').val());
+                            setInterval(CheckdbifnotAnsweredd, 500);
+                            setInterval(CheckdbAnswered, 500);
+                        }
+                    });
 
-                   },
-                   error: function AjaxError(response) {
-                       //alert(response.status + ' ' + response.responseText);
-                   },
-                   failure: function AjaxFailure(response) {
-                       //response.status + ' ' + response.statusText;
-                   }
-               })
-           }
+                },
+                error: function AjaxError(response) {
+                    //alert(response.status + ' ' + response.responseText);
+                },
+                failure: function AjaxFailure(response) {
+                    //response.status + ' ' + response.statusText;
+                }
+            })
+        }
 
 
 
@@ -405,32 +535,33 @@
                         killInterval();
                         validatequestion();
                         $('#notification').modal('show');
-                        $('#myModalLabel1').text('Ooopps ! Better Luck next Time :P');
-                        $('#meid1').text($(this).find("EID").text());
+                        $('#myModalLabel1').text('Ooopps ! Better Luck next Time..');
+                        //$('#meid1').text($(this).find("EID").text());
+                        $('#meid1').text('Someone Already');
                         $('#gtra').text('Got the right Answer');
-                        $('#meid2').text(' + ' + $(this).find("Points").text() + ' Points for ' + $(this).find("EID").text());
+                        //$('#meid2').text(' + ' + $(this).find("Points").text() + ' Points for ' + $(this).find("EID").text());
                         setInterval(LoadQuestdummyid, 500);
                         UpdateQuizbeeStatusI();
                     }
                 });
-            };
-            function AjaxError(response) {
-                //alert(response.status + ' ' + response.statusText);
-            };
-            function AjaxFailure(response) {
-                //alert(response.status + ' ' + response.statusText);
-            };
-        };
+               };
+               function AjaxError(response) {
+                   //alert(response.status + ' ' + response.statusText);
+               };
+               function AjaxFailure(response) {
+                   //alert(response.status + ' ' + response.statusText);
+               };
+           };
 
-        function validatequestion() {
-            if ($('#questionid').val() == 0) {
-                killInterval();
-            }
-            else {
-                //alert($('#questionid').val());
-                timerstart();
-            }
-        };
+           function validatequestion() {
+               if ($('#questionid').val() == 0) {
+                   killInterval();
+               }
+               else {
+                   //alert($('#questionid').val());
+                   timerstart();
+               }
+           };
 
            function timerstart() {
                var min = 0;
@@ -441,14 +572,14 @@
                    document.getElementById("timer").innerHTML = "  " + min + ":" + sec + " second";
                    sec--;
                    if (sec == 00) {
-                           min = 0;
-                           sec = 30;
+                       min = 0;
+                       sec = 30;
 
-                           killInterval();
-                           UpdateQuestionaireNotAnswered();
-                           AlertCorrectAnswer($('#questionid').val());
-                           refreshquestionform();
-                           $('#timer').text('0:30 second');
+                       killInterval();
+                       UpdateQuestionaireNotAnswered();
+                       AlertCorrectAnswer($('#questionid').val());
+                       refreshquestionform();
+                       $('#timer').text('0:30 second');
 
                    }
                }, 1000);
@@ -553,7 +684,7 @@
                    var exkeys = xml.find("Table1");
                    $.each(exkeys, function () {
                        if ($('#questionid').val() == $(this).find("QuestionID").text()) {
-                         
+
                        }
                        else {
                            $('#notification').modal('hide');
@@ -590,7 +721,7 @@
                    if (secs == -1) {
                        secs = 5;
                        killInterval1();
-                       
+
                        $('#countdowntimer').text('5');
                        $('#countdowntimer').val('5');
                        $('#countdowntostart').modal('hide');
@@ -624,7 +755,7 @@
                    var xml = $(xmlDoc);
                    var exkeys = xml.find("Table1");
                    $.each(exkeys, function () {
-                       
+
                        $('#answer1').bind("click", function () {
                            document.getElementById("answer2").style.backgroundColor = "darkorange";
                            document.getElementById("answer3").style.backgroundColor = "darkorange";
@@ -636,8 +767,8 @@
                            document.getElementById("answer3").style.backgroundColor = "darkorange";
                            document.getElementById("answer4").style.backgroundColor = "darkorange";
                            document.getElementById("answer1").style.backgroundColor = "green";
-                               ans = $('#answer1').text();
-                               CheckAnswer();
+                           ans = $('#answer1').text();
+                           CheckAnswer();
                        });
 
                        $('#answer2').bind("click", function () {
@@ -651,8 +782,8 @@
                            document.getElementById("answer3").style.backgroundColor = "darkorange";
                            document.getElementById("answer4").style.backgroundColor = "darkorange";
                            document.getElementById("answer2").style.backgroundColor = "green";
-                               ans = $('#answer2').text();
-                               CheckAnswer();
+                           ans = $('#answer2').text();
+                           CheckAnswer();
                        });
 
                        $('#answer3').bind("click", function () {
@@ -666,8 +797,8 @@
                            document.getElementById("answer1").style.backgroundColor = "darkorange";
                            document.getElementById("answer4").style.backgroundColor = "darkorange";
                            document.getElementById("answer3").style.backgroundColor = "green";
-                               ans = $('#answer3').text();
-                               CheckAnswer();
+                           ans = $('#answer3').text();
+                           CheckAnswer();
                        });
                        $('#answer4').bind("click", function () {
                            document.getElementById("answer2").style.backgroundColor = "darkorange";
@@ -680,8 +811,8 @@
                            document.getElementById("answer3").style.backgroundColor = "darkorange";
                            document.getElementById("answer1").style.backgroundColor = "darkorange";
                            document.getElementById("answer4").style.backgroundColor = "green";
-                               ans = $('#answer4').text();
-                               CheckAnswer();
+                           ans = $('#answer4').text();
+                           CheckAnswer();
                        });
 
                        $('#answer1').text($(this).find("answer1").text());
@@ -746,7 +877,8 @@
                                $('#notification').modal('show');
                                $('#meid1').text('');
                                $('#myModalLabel1').text('Ooopps ! Better Luck next Time!');
-                               $('#gtra').text('You Choose the Wrong Answer');
+                               //$('#gtra').text('You Choose the Wrong Answer');
+                               $('#gtra').text('Your answer is incorrect! ');
                                $('#meid2').text('');
                                ans = '';
                            }
@@ -762,129 +894,129 @@
            }
 
 
-        function UpdateQuizbeeStatus() {
-            var arr = new Array();
-            arr[0] = 1;
-            $.ajax({
-                type: "POST",
-                url: "UserSB.aspx/updateQuizbeeStatus",
-                data: JSON.stringify({ _arr: arr }),
-                contentType: "application/json; charset=utf-8",
-                dataTaype: "json",
-                success: AjaxSucceeded,
-                error: AjaxError,
-                failure: AjaxFailure
-            });
+           function UpdateQuizbeeStatus() {
+               var arr = new Array();
+               arr[0] = 1;
+               $.ajax({
+                   type: "POST",
+                   url: "UserSB.aspx/updateQuizbeeStatus",
+                   data: JSON.stringify({ _arr: arr }),
+                   contentType: "application/json; charset=utf-8",
+                   dataTaype: "json",
+                   success: AjaxSucceeded,
+                   error: AjaxError,
+                   failure: AjaxFailure
+               });
 
-            function AjaxSucceeded(response) {
-
-
-            }
-            function AjaxError(response) {
-                //alert(response.status + ' ' + response.statusText);
-            }
-            function AjaxFailure(response) {
-                //alert(response.status + ' ' + response.statusText);
-            }
-        }
-
-        function UpdateQuizbeeStatusI() {
-            var arr = new Array();
-            arr[0] = 1;
-            $.ajax({
-                type: "POST",
-                url: "UserSB.aspx/updateQuizbeeStatusI",
-                data: JSON.stringify({ _arr: arr }),
-                contentType: "application/json; charset=utf-8",
-                dataTaype: "json",
-                success: AjaxSucceeded,
-                error: AjaxError,
-                failure: AjaxFailure
-            });
-
-            function AjaxSucceeded(response) {
+               function AjaxSucceeded(response) {
 
 
-            }
-            function AjaxError(response) {
-                //alert(response.status + ' ' + response.statusText);
-            }
-            function AjaxFailure(response) {
-                //alert(response.status + ' ' + response.statusText);
-            }
-        }
+               }
+               function AjaxError(response) {
+                   //alert(response.status + ' ' + response.statusText);
+               }
+               function AjaxFailure(response) {
+                   //alert(response.status + ' ' + response.statusText);
+               }
+           }
 
-        function LoadQuestionIDforNewinRoom(questid) {
-            $.ajax({
-                type: "POST",
-                url: "UserSB.aspx/loadQuestionIDforNewinRoom",
-                data: '{questid: ' + questid + '}',
-                contentType: "application/json; charset=utf-8",
-                dataTaype: "json",
-                success: AjaxSucceeded,
-                error: AjaxError,
-                failure: AjaxFailure
-            });
-            function AjaxSucceeded(response) {
-                var xmlDoc = $.parseXML(response.d);
-                var xml = $(xmlDoc);
-                var exkeys = xml.find("Table1");
-                $.each(exkeys, function () {
+           function UpdateQuizbeeStatusI() {
+               var arr = new Array();
+               arr[0] = 1;
+               $.ajax({
+                   type: "POST",
+                   url: "UserSB.aspx/updateQuizbeeStatusI",
+                   data: JSON.stringify({ _arr: arr }),
+                   contentType: "application/json; charset=utf-8",
+                   dataTaype: "json",
+                   success: AjaxSucceeded,
+                   error: AjaxError,
+                   failure: AjaxFailure
+               });
 
-                    $('#questionid').val($(this).find("QuestionID").text());
+               function AjaxSucceeded(response) {
 
 
-                });
-            };
-            function AjaxError(response) {
-                //alert(response.status + ' ' + response.statusText);
-            };
-            function AjaxFailure(response) {
-                //alert(response.status + ' ' + response.statusText);
-            };
-        };
+               }
+               function AjaxError(response) {
+                   //alert(response.status + ' ' + response.statusText);
+               }
+               function AjaxFailure(response) {
+                   //alert(response.status + ' ' + response.statusText);
+               }
+           }
+
+           function LoadQuestionIDforNewinRoom(questid) {
+               $.ajax({
+                   type: "POST",
+                   url: "UserSB.aspx/loadQuestionIDforNewinRoom",
+                   data: '{questid: ' + questid + '}',
+                   contentType: "application/json; charset=utf-8",
+                   dataTaype: "json",
+                   success: AjaxSucceeded,
+                   error: AjaxError,
+                   failure: AjaxFailure
+               });
+               function AjaxSucceeded(response) {
+                   var xmlDoc = $.parseXML(response.d);
+                   var xml = $(xmlDoc);
+                   var exkeys = xml.find("Table1");
+                   $.each(exkeys, function () {
+
+                       $('#questionid').val($(this).find("QuestionID").text());
 
 
-        function CheckdbifnotAnsweredd() {
-            CheckifnotAnswered($('#questionid').val());
-        }
+                   });
+               };
+               function AjaxError(response) {
+                   //alert(response.status + ' ' + response.statusText);
+               };
+               function AjaxFailure(response) {
+                   //alert(response.status + ' ' + response.statusText);
+               };
+           };
 
-        function CheckifnotAnswered(questid) {
 
-            $.ajax({
-                type: "POST",
-                url: "UserSB.aspx/checkifnotAnswered",
-                data: '{questid: ' + questid + '}',
-                contentType: "application/json; charset=utf-8",
-                dataTaype: "json",
-                success: AjaxSucceeded,
-                error: AjaxError,
-                failure: AjaxFailure
-            });
-            function AjaxSucceeded(response) {
-                var xmlDoc = $.parseXML(response.d);
-                var xml = $(xmlDoc);
-                var exkeys = xml.find("Table1");
-                $.each(exkeys, function () {
-                    if ($('#questionid').val() == $(this).find("QuestionID").text()) {
-                        refreshquestionform();
-                        setInterval(CheckdbAnswered, 5000000);
-                        setInterval(LoadQuestdummyid, 500);
-                        UpdateQuizbeeStatusI();
-                    }
-                    else {
+           function CheckdbifnotAnsweredd() {
+               CheckifnotAnswered($('#questionid').val());
+           }
 
-                    }
+           function CheckifnotAnswered(questid) {
 
-                });
-            }
-            function AjaxError(response) {
-                //alert(response.status + ' ' + response.statusText);
-            }
-            function AjaxFailure(response) {
-                //alert(response.status + ' ' + response.statusText);
-            }
-        }
+               $.ajax({
+                   type: "POST",
+                   url: "UserSB.aspx/checkifnotAnswered",
+                   data: '{questid: ' + questid + '}',
+                   contentType: "application/json; charset=utf-8",
+                   dataTaype: "json",
+                   success: AjaxSucceeded,
+                   error: AjaxError,
+                   failure: AjaxFailure
+               });
+               function AjaxSucceeded(response) {
+                   var xmlDoc = $.parseXML(response.d);
+                   var xml = $(xmlDoc);
+                   var exkeys = xml.find("Table1");
+                   $.each(exkeys, function () {
+                       if ($('#questionid').val() == $(this).find("QuestionID").text()) {
+                           refreshquestionform();
+                           setInterval(CheckdbAnswered, 5000000);
+                           setInterval(LoadQuestdummyid, 500);
+                           UpdateQuizbeeStatusI();
+                       }
+                       else {
+
+                       }
+
+                   });
+               }
+               function AjaxError(response) {
+                   //alert(response.status + ' ' + response.statusText);
+               }
+               function AjaxFailure(response) {
+                   //alert(response.status + ' ' + response.statusText);
+               }
+           }
 
 
     </script>

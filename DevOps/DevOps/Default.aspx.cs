@@ -20,6 +20,24 @@ namespace DevOps
 
 
         [System.Web.Services.WebMethodAttribute(), System.Web.Script.Services.ScriptMethodAttribute()]
+        public static string loadTop3Users(Int32 userno)
+        {
+            SBObj _sbobj = new SBObj();
+            _sbobj.UserNo = userno;
+            DataSet ds = new DataSet();
+            try
+            {
+                ds.Tables.Add(_sbobj.LoadTop3Users());
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return ds.GetXml();
+        }
+
+
+        [System.Web.Services.WebMethodAttribute(), System.Web.Script.Services.ScriptMethodAttribute()]
         public static string loadTop1(Int32 userno)
         {
             SBObj _sbobj = new SBObj();

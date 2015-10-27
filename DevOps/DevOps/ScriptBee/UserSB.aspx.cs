@@ -234,5 +234,35 @@ namespace DevOps.ScriptBee
             }
             return ds.GetXml();
         }
+
+        [System.Web.Services.WebMethodAttribute(), System.Web.Script.Services.ScriptMethodAttribute()]
+        public static string updateUserSBStatus(List<string> _arr)
+        {
+            SBObj _sbobj = new SBObj();
+
+            _sbobj.EID = _arr[1].ToString();
+            return _sbobj.UpdateUserSBStatus();
+        }
+
+
+        [System.Web.Services.WebMethodAttribute(), System.Web.Script.Services.ScriptMethodAttribute()]
+        public static string checkifQuizBeeStatusisActive(List<string> _arr)
+        {
+            DataTable dummy = new DataTable();
+
+            SystemObjects.SBObj _sbobj = new SystemObjects.SBObj();
+            _sbobj.EID = _arr[0].ToString();
+            DataSet ds = new DataSet();
+            try
+            {
+                dummy.Merge(_sbobj.CheckifQuizBeeStatusisActive());
+                ds.Tables.Add(dummy);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return ds.GetXml();
+        }
     }
 }

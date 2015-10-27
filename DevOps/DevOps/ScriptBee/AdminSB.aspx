@@ -263,7 +263,7 @@
 
                     $('#txtquestionid').val($(this).find("QuestionID").text());
                     $('#txtquestion').val($(this).find("Question").text());
-                    $('#txtanswer').val($(this).find("Answer").text());
+                    $('#txtanswer').val($(this).find("CorrectAnswer").text());
                     $('#txtdifficulty').val($(this).find("Difficulty").text());
                 });
             }

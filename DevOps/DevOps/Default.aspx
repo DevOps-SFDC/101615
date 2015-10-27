@@ -262,9 +262,10 @@
         }
         function loader(sender, args) {
             $(document).ready(function () {
-                LoadTopScorers();
+                //LoadTopScorers();
                 DisplayLeaderBoard();
-
+                LoadTop3Users('0');
+                
 
 
 
@@ -288,10 +289,12 @@
             LoadTop3('0');
         }
 
-        function LoadTop1(userno) {
+
+
+        function LoadTop3Users(userno) {
             $.ajax({
                 type: "POST",
-                url: "Default.aspx/loadTop1",
+                url: "Default.aspx/loadTop3Users",
                 data: '{userno: ' + userno + '}',
                 contentType: "application/json; charset=utf-8",
                 dataTaype: "json",
@@ -305,8 +308,8 @@
                 var exkeys = xml.find("Table1");
                 $.each(exkeys, function () {
 
-                    $('#txttp1n').text($(this).find("EID").text());
-                    $('#txttp1s').text($(this).find("Points").text() + ' Points');
+                    $('#txttp1n').text($(this).find("EID1").text());
+                    $('#txttp1s').text($(this).find("Points1").text() + ' Points');
 
                     var currentUrl = top.location.pathname;
                     var dirPathCon = currentUrl.split("/");
@@ -319,100 +322,37 @@
                     /* Avatar Specifications */
                     $('.eid2').append('<p style="margin: 0; color: black;">' + nameGenerator($('#txttp1n').text()) + '</p>');
                     $('.aang1').append('<p class="avatarName1">' + name + '</p>');
-                    $('.aang1').css("background", color);
+                    $('.aang1').css("background", colorPicker());
                     $('.qbtopline11').css("background", colorPicker());
                     $('.avatarName1').css("margin", "0");
 
-                });
-            }
-            function AjaxError(response) {
-                //alert(response.status + ' ' + response.statusText);
-            }
-            function AjaxFailure(response) {
-                //alert(response.status + ' ' + response.statusText);
-            }
-        }
 
-        function LoadTop2(userno) {
-            $.ajax({
-                type: "POST",
-                url: "Default.aspx/loadTop2",
-                data: '{userno: ' + userno + '}',
-                contentType: "application/json; charset=utf-8",
-                dataTaype: "json",
-                success: AjaxSucceeded,
-                error: AjaxError,
-                failure: AjaxFailure
-            });
-            function AjaxSucceeded(response) {
-                var xmlDoc = $.parseXML(response.d);
-                var xml = $(xmlDoc);
-                var exkeys = xml.find("Table1");
-                $.each(exkeys, function () {
 
-                    $('#txttp2n').text($(this).find("EID").text());
-                    $('#txttp2s').text($(this).find("Points").text() + ' Points');
+                    $('#txttp2n').text($(this).find("EID2").text());
+                    $('#txttp2s').text($(this).find("Points2").text() + ' Points');
 
-                    var currentUrl = top.location.pathname;
-                    var dirPathCon = currentUrl.split("/");
-                    var dirPath = dirPathCon[dirPathCon.length - 1];
-                    var dirPathNoExt = dirPath.split(".");
-                    dirPathNoExt = dirPathNoExt[0];
-                    console.log(dirPathNoExt);
-                    var name = getNameInitials($('#txttp2n').text());
-                    var color = colorPicker();
+                    var name1 = getNameInitials($('#txttp2n').text());
                     /* Avatar Specifications */
                     $('.eid3').append('<p style="margin: 0; color: black;">' + nameGenerator($('#txttp2n').text()) + '</p>');
-                    $('.aang2').append('<p class="avatarName2">' + name + '</p>');
-                    $('.aang2').css("background", color);
+                    $('.aang2').append('<p class="avatarName2">' + name1 + '</p>');
+                    $('.aang2').css("background", colorPicker());
                     $('.qbtopline12').css("background", colorPicker());
                     $('.avatarName2').css("margin", "0");
 
-                });
-            }
-            function AjaxError(response) {
-                //alert(response.status + ' ' + response.statusText);
-            }
-            function AjaxFailure(response) {
-                //alert(response.status + ' ' + response.statusText);
-            }
-        }
 
-        function LoadTop3(userno) {
-            $.ajax({
-                type: "POST",
-                url: "Default.aspx/loadTop3",
-                data: '{userno: ' + userno + '}',
-                contentType: "application/json; charset=utf-8",
-                dataTaype: "json",
-                success: AjaxSucceeded,
-                error: AjaxError,
-                failure: AjaxFailure
-            });
-            function AjaxSucceeded(response) {
-                var xmlDoc = $.parseXML(response.d);
-                var xml = $(xmlDoc);
-                var exkeys = xml.find("Table1");
-                $.each(exkeys, function () {
 
-                    $('#txttp3n').text($(this).find("EID").text());
-                    $('#txttp3s').text($(this).find("Points").text() + ' Points');
+                    $('#txttp3n').text($(this).find("EID3").text());
+                    $('#txttp3s').text($(this).find("Points3").text() + ' Points');
 
-                    var currentUrl = top.location.pathname;
-                    var dirPathCon = currentUrl.split("/");
-                    var dirPath = dirPathCon[dirPathCon.length - 1];
-                    var dirPathNoExt = dirPath.split(".");
-                    dirPathNoExt = dirPathNoExt[0];
-                    console.log(dirPathNoExt);
-                    var name = getNameInitials($('#txttp3n').text());
-                    var color = colorPicker();
+                    var name2 = getNameInitials($('#txttp3n').text());
                     /* Avatar Specifications */
                     $('.eid4').append('<p style="margin: 0; color: black;">' + nameGenerator($('#txttp3n').text()) + '</p>');
-                    $('.aang3').append('<p class="avatarName3">' + name + '</p>');
-                    $('.aang3').css("background", color);
+                    $('.aang3').append('<p class="avatarName3">' + name2 + '</p>');
+                    $('.aang3').css("background", colorPicker());
                     $('.qbtopline13').css("background", colorPicker());
                     $('.avatarName3').css("margin", "0");
 
+
                 });
             }
             function AjaxError(response) {
@@ -422,6 +362,145 @@
                 //alert(response.status + ' ' + response.statusText);
             }
         }
+
+
+
+
+
+        //function LoadTop1(userno) {
+        //    $.ajax({
+        //        type: "POST",
+        //        url: "Default.aspx/loadTop1",
+        //        data: '{userno: ' + userno + '}',
+        //        contentType: "application/json; charset=utf-8",
+        //        dataTaype: "json",
+        //        success: AjaxSucceeded,
+        //        error: AjaxError,
+        //        failure: AjaxFailure
+        //    });
+        //    function AjaxSucceeded(response) {
+        //        var xmlDoc = $.parseXML(response.d);
+        //        var xml = $(xmlDoc);
+        //        var exkeys = xml.find("Table1");
+        //        $.each(exkeys, function () {
+
+        //            $('#txttp1n').text($(this).find("EID").text());
+        //            $('#txttp1s').text($(this).find("Points").text() + ' Points');
+
+        //            var currentUrl = top.location.pathname;
+        //            var dirPathCon = currentUrl.split("/");
+        //            var dirPath = dirPathCon[dirPathCon.length - 1];
+        //            var dirPathNoExt = dirPath.split(".");
+        //            dirPathNoExt = dirPathNoExt[0];
+        //            console.log(dirPathNoExt);
+        //            var name = getNameInitials($('#txttp1n').text());
+        //            var color = colorPicker();
+        //            /* Avatar Specifications */
+        //            $('.eid2').append('<p style="margin: 0; color: black;">' + nameGenerator($('#txttp1n').text()) + '</p>');
+        //            $('.aang1').append('<p class="avatarName1">' + name + '</p>');
+        //            $('.aang1').css("background", color);
+        //            $('.qbtopline11').css("background", colorPicker());
+        //            $('.avatarName1').css("margin", "0");
+
+        //        });
+        //    }
+        //    function AjaxError(response) {
+        //        //alert(response.status + ' ' + response.statusText);
+        //    }
+        //    function AjaxFailure(response) {
+        //        //alert(response.status + ' ' + response.statusText);
+        //    }
+        //}
+
+        //function LoadTop2(userno) {
+        //    $.ajax({
+        //        type: "POST",
+        //        url: "Default.aspx/loadTop2",
+        //        data: '{userno: ' + userno + '}',
+        //        contentType: "application/json; charset=utf-8",
+        //        dataTaype: "json",
+        //        success: AjaxSucceeded,
+        //        error: AjaxError,
+        //        failure: AjaxFailure
+        //    });
+        //    function AjaxSucceeded(response) {
+        //        var xmlDoc = $.parseXML(response.d);
+        //        var xml = $(xmlDoc);
+        //        var exkeys = xml.find("Table1");
+        //        $.each(exkeys, function () {
+
+        //            $('#txttp2n').text($(this).find("EID").text());
+        //            $('#txttp2s').text($(this).find("Points").text() + ' Points');
+
+        //            var currentUrl = top.location.pathname;
+        //            var dirPathCon = currentUrl.split("/");
+        //            var dirPath = dirPathCon[dirPathCon.length - 1];
+        //            var dirPathNoExt = dirPath.split(".");
+        //            dirPathNoExt = dirPathNoExt[0];
+        //            console.log(dirPathNoExt);
+        //            var name = getNameInitials($('#txttp2n').text());
+        //            var color = colorPicker();
+        //            /* Avatar Specifications */
+        //            $('.eid3').append('<p style="margin: 0; color: black;">' + nameGenerator($('#txttp2n').text()) + '</p>');
+        //            $('.aang2').append('<p class="avatarName2">' + name + '</p>');
+        //            $('.aang2').css("background", color);
+        //            $('.qbtopline12').css("background", colorPicker());
+        //            $('.avatarName2').css("margin", "0");
+
+        //        });
+        //    }
+        //    function AjaxError(response) {
+        //        //alert(response.status + ' ' + response.statusText);
+        //    }
+        //    function AjaxFailure(response) {
+        //        //alert(response.status + ' ' + response.statusText);
+        //    }
+        //}
+
+        //function LoadTop3(userno) {
+        //    $.ajax({
+        //        type: "POST",
+        //        url: "Default.aspx/loadTop3",
+        //        data: '{userno: ' + userno + '}',
+        //        contentType: "application/json; charset=utf-8",
+        //        dataTaype: "json",
+        //        success: AjaxSucceeded,
+        //        error: AjaxError,
+        //        failure: AjaxFailure
+        //    });
+        //    function AjaxSucceeded(response) {
+        //        var xmlDoc = $.parseXML(response.d);
+        //        var xml = $(xmlDoc);
+        //        var exkeys = xml.find("Table1");
+        //        $.each(exkeys, function () {
+
+        //            $('#txttp3n').text($(this).find("EID").text());
+        //            $('#txttp3s').text($(this).find("Points").text() + ' Points');
+
+        //            var currentUrl = top.location.pathname;
+        //            var dirPathCon = currentUrl.split("/");
+        //            var dirPath = dirPathCon[dirPathCon.length - 1];
+        //            var dirPathNoExt = dirPath.split(".");
+        //            dirPathNoExt = dirPathNoExt[0];
+        //            console.log(dirPathNoExt);
+        //            var name = getNameInitials($('#txttp3n').text());
+        //            var color = colorPicker();
+        //            /* Avatar Specifications */
+        //            $('.eid4').append('<p style="margin: 0; color: black;">' + nameGenerator($('#txttp3n').text()) + '</p>');
+        //            $('.aang3').append('<p class="avatarName3">' + name + '</p>');
+        //            $('.aang3').css("background", color);
+        //            $('.qbtopline13').css("background", colorPicker());
+        //            $('.avatarName3').css("margin", "0");
+
+        //        });
+        //    }
+        //    function AjaxError(response) {
+        //        //alert(response.status + ' ' + response.statusText);
+        //    }
+        //    function AjaxFailure(response) {
+        //        //alert(response.status + ' ' + response.statusText);
+        //    }
+        //}
 
 
         function DisplayLeaderBoard() {
