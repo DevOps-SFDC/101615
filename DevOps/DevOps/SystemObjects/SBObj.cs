@@ -642,6 +642,58 @@ namespace DevOps.SystemObjects
             oParam.AddWithValue("@eid", _eid);
             return dt = this.FGetDataTable(@"SBActiveQuizBee", oParam);
         }
+
+        public DataTable DisplayOnlineUsers()
+        {
+            DataTable dt = new DataTable();
+            var oParam = new SqlCommand().Parameters;
+            return dt = this.FGetDataTable(@"SBDisplayOnlineUsers", oParam);
+        }
+
+
+        public DataTable CheckError()
+        {
+            DataTable dt = new DataTable();
+            var oParam = new SqlCommand().Parameters;
+            oParam.AddWithValue("@questionid", _questionid);
+            return dt = this.FGetDataTable(@"SBAdminErrorChecker", oParam);
+        }
+
+        public string OverrideQB()
+        {
+            string msg;
+            var oParam = new SqlCommand().Parameters;
+            oParam.AddWithValue("@status", _status);
+            try
+            {
+                this.ExecuteInsert(@"SBOverrideQB", oParam);
+                msg = "Saved!";
+            }
+            catch (Exception ex)
+            {
+                msg = ex.ToString();
+            }
+
+            return msg;
+        }
+
+        public string OverrideNP()
+        {
+            string msg;
+            var oParam = new SqlCommand().Parameters;
+            oParam.AddWithValue("@status", _status);
+            try
+            {
+                this.ExecuteInsert(@"SBOverrideNP", oParam);
+                msg = "Saved!";
+            }
+            catch (Exception ex)
+            {
+                msg = ex.ToString();
+            }
+
+            return msg;
+        }
         #endregion
 
 

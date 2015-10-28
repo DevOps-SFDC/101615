@@ -123,6 +123,59 @@ namespace DevOps.ScriptBee
             return ds.GetXml();
         }
 
+        [System.Web.Services.WebMethodAttribute(), System.Web.Script.Services.ScriptMethodAttribute()]
+        public static string displayOnlineUsers(List<string> _arr)
+        {
+            DataTable dummy = new DataTable();
+
+            SBObj _sbobj = new SBObj();
+            DataSet ds = new DataSet();
+            try
+            {
+                dummy.Merge(_sbobj.DisplayOnlineUsers());
+                ds.Tables.Add(dummy);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return ds.GetXml();
+        }
+
+        [System.Web.Services.WebMethodAttribute(), System.Web.Script.Services.ScriptMethodAttribute()]
+        public static string checkError(Int32 questid)
+        {
+            SBObj _sbobj = new SBObj();
+            _sbobj.QuestionID = questid;
+            DataSet ds = new DataSet();
+            try
+            {
+                ds.Tables.Add(_sbobj.CheckError());
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return ds.GetXml();
+        }
+
+        [System.Web.Services.WebMethodAttribute(), System.Web.Script.Services.ScriptMethodAttribute()]
+        public static string overrideQB(List<string> _arr)
+        {
+            SBObj _sbobj = new SBObj();
+            _sbobj.Status = _arr[0].ToString();
+
+            return _sbobj.OverrideQB();
+        }
+
+        [System.Web.Services.WebMethodAttribute(), System.Web.Script.Services.ScriptMethodAttribute()]
+        public static string overrideNP(List<string> _arr)
+        {
+            SBObj _sbobj = new SBObj();
+            _sbobj.Status = _arr[0].ToString();
+
+            return _sbobj.OverrideNP();
+        }
 
 
     }

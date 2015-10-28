@@ -334,8 +334,8 @@
         }
         return name;
     }
-    $('#BattleoftheBrains').click(function () {
-        window.location.href = "/ScriptBee/UserSB.aspx";
-    });
+    //$('#BattleoftheBrains').click(function () {
+    //    window.location.href = "/ScriptBee/UserSB.aspx";
+    //});
   
 </script>
