@@ -101,7 +101,7 @@
         <div id="questionform" class="panel panel-body well well-lg questionContainer">
             <div class="col-xs-12" style="padding: 0px; box-shadow: rgba(0, 0, 0, 0.30) 0px 1px 1px; display: inline-block;">
                 <div class="col-md-12" style="background: rgba(44, 62, 80,1.0); color: #FFF; font-family: 'Open Sans',serif; padding-bottom: 15px; width: 100%">
-                    <h1 style="display: inline-block"><i class="fa fa-pencil"></i>Online Quiz Bee</h1>
+                    <h1 style="display: inline-block"><i class="fa fa-pencil"></i>&nbsp;Online Quiz Bee</h1>
                 </div>
             </div>
 
@@ -143,14 +143,14 @@
 
             <div class="col-xs-12">
                 <div class="col-md-6" style="padding-top: 5%; padding-bottom: 10%;">
-                    <span id="answer1" style="text-align: center; display: block; padding-bottom: 5%; padding-top: 5%; color: black; background-color: darkorange;"></span>
+                    <span id="answer1" style="border: 2px solid #FFFFFF; color: #FFFFFF; text-align: center; display: block; padding-bottom: 5%; padding-top: 5%; background: rgba(0, 0, 0, 0.55);"></span>
                     <br />
-                    <span id="answer2" style="text-align: center; display: block; padding-bottom: 5%; padding-top: 5%; color: black; background-color: darkorange;"></span>
+                    <span id="answer2" style="border: 2px solid #FFFFFF; color: #FFFFFF; text-align: center; display: block; padding-bottom: 5%; padding-top: 5%; background: rgba(0, 0, 0, 0.55);"></span>
                 </div>
                 <div class="col-md-6" style="padding-top: 5%; padding-bottom: 10%;">
-                    <span id="answer3" style="text-align: center; display: block; padding-bottom: 5%; padding-top: 5%; color: black; background-color: darkorange;"></span>
+                    <span id="answer3" style="border: 2px solid #FFFFFF; color: #FFFFFF; text-align: center; display: block; padding-bottom: 5%; padding-top: 5%; background: rgba(0, 0, 0, 0.55);"></span>
                     <br />
-                    <span id="answer4" style="text-align: center; display: block; padding-bottom: 5%; padding-top: 5%; color: black; background-color: darkorange;"></span>
+                    <span id="answer4" style="border: 2px solid #FFFFFF; color: #FFFFFF; text-align: center; display: block; padding-bottom: 5%; padding-top: 5%; background: rgba(0, 0, 0, 0.55);"></span>
                     <%--<textarea style="resize: none; height: 150px; margin-bottom: 20px" class="form-control" id="guestanswer" rows="5" placeholder="What is the answer?"></textarea>--%>
                 </div>
             </div>
@@ -158,7 +158,9 @@
             <span id="ErrorDiv" class="Framework_Error_Message_Span"></span>
         </div>
 
+        <div class="scorePanel" style="background: #000; width: 100px; height: 300px; float: left;">
 
+        </div>
 
 
 
@@ -428,15 +430,15 @@
             $('#points').val('');
             $('#difficulty').val('');
             $('#timer').val('');
-            $('#answer1').text('');
-            $('#answer2').text('');
-            $('#answer3').text('');
-            $('#answer4').text('');
+            $('#answer1').text('Answer');
+            $('#answer2').text('Answer');
+            $('#answer3').text('Answer');
+            $('#answer4').text('Answer');
             ans = '';
-            document.getElementById("answer1").style.backgroundColor = "darkorange";
-            document.getElementById("answer2").style.backgroundColor = "darkorange";
-            document.getElementById("answer3").style.backgroundColor = "darkorange";
-            document.getElementById("answer4").style.backgroundColor = "darkorange";
+            document.getElementById("answer1").style.backgroundColor = "rgba(0, 0, 0, 0.45)";
+            document.getElementById("answer2").style.backgroundColor = "rgba(0, 0, 0, 0.45)";
+            document.getElementById("answer3").style.backgroundColor = "rgba(0, 0, 0, 0.45)";
+            document.getElementById("answer4").style.backgroundColor = "rgba(0, 0, 0, 0.45)";
 
             $('#answer1').unbind('click');
             $('#answer1').unbind('dblclick');
