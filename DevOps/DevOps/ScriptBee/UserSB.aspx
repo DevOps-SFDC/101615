@@ -424,7 +424,7 @@
             $('#meid2').text('');
         };
         function refreshquestionform() {
-            $('#timer').text('0:30 second');
+            $('#timer').text('0:00 second');
             $('#questionid').val(0);
             $('#question').val('');
             $('#points').val('');
@@ -560,15 +560,26 @@
                    killInterval();
                }
                else {
-                   //alert($('#questionid').val());
-                   timerstart();
+                   if ($('#difficulty').val() == 'Easy') {
+                       timerstart();
+                   }
+                   else if ($('#difficulty').val() == 'Average') {
+                       timerstartave();
+                   }
+                   else if ($('#difficulty').val() == 'Hard') {
+                       timerstarthard();
+                   }
+                   else if ($('#difficulty').val() == 'Extra') {
+                       timerstartextra();
+                   }
+
                }
            };
 
            function timerstart() {
                var min = 0;
                var sec = 30;
-               $('#guestanswer').focus();
+               //$('#guestanswer').focus();
                timer = setInterval(function () {
 
                    document.getElementById("timer").innerHTML = "  " + min + ":" + sec + " second";
@@ -581,13 +592,93 @@
                        UpdateQuestionaireNotAnswered();
                        AlertCorrectAnswer($('#questionid').val());
                        refreshquestionform();
-                       $('#timer').text('0:30 second');
+                       //$('#timer').text('0:30 second');
 
                    }
                }, 1000);
            };
            function killInterval() {
                clearInterval(timer);
+
+           };
+
+
+           function timerstartave() {
+               var min = 0;
+               var sec = 45;
+               //$('#guestanswer').focus();
+               timerave = setInterval(function () {
+
+                   document.getElementById("timer").innerHTML = "  " + min + ":" + sec + " second";
+                   sec--;
+                   if (sec == 00) {
+                       min = 0;
+                       sec = 45;
+
+                       killIntervalave();
+                       UpdateQuestionaireNotAnswered();
+                       AlertCorrectAnswer($('#questionid').val());
+                       refreshquestionform();
+                       //$('#timer').text('0:30 second');
+
+                   }
+               }, 1000);
+           };
+           function killIntervalave() {
+               clearInterval(timerave);
+
+           };
+
+           function timerstarthard() {
+               var min = 0;
+               var sec = 90;
+               //$('#guestanswer').focus();
+               timerhard = setInterval(function () {
+
+                   document.getElementById("timer").innerHTML = "  " + min + ":" + sec + " second";
+                   sec--;
+                   if (sec == 00) {
+                       min = 0;
+                       sec = 90;
+
+                       killIntervalhard();
+                       UpdateQuestionaireNotAnswered();
+                       AlertCorrectAnswer($('#questionid').val());
+                       refreshquestionform();
+                       //$('#timer').text('0:30 second');
+
+                   }
+               }, 1000);
+           };
+           function killIntervalhard() {
+               clearInterval(timerhard);
+
+           };
+
+
+           function timerstartextra() {
+               var min = 0;
+               var sec = 20;
+               //$('#guestanswer').focus();
+               timerextra = setInterval(function () {
+
+                   document.getElementById("timer").innerHTML = "  " + min + ":" + sec + " second";
+                   sec--;
+                   if (sec == 00) {
+                       min = 0;
+                       sec = 20;
+
+                       killIntervalextra();
+                       UpdateQuestionaireNotAnswered();
+                       AlertCorrectAnswer($('#questionid').val());
+                       refreshquestionform();
+                       //$('#timer').text('0:30 second');
+
+                   }
+               }, 1000);
+           };
+           function killIntervalextra() {
+               clearInterval(timerextra);
 
            };
 
@@ -613,6 +704,9 @@
                        //UpdateQuestionaireNotAnswered();
                        validatequestion();
                        killInterval();
+                       //killIntervalave();
+                       //killIntervalhard();
+                       //killIntervalextra();
                        setInterval(CheckdbAnswered, 5000000);
                        setInterval(LoadQuestdummyid, 500);
                        $('#timer').text('0:30 second');
