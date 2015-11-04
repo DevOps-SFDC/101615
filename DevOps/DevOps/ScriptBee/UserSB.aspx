@@ -87,7 +87,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="FeaturedContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
-    <div id="page-wrapper" style="padding-top: 4%">
+    <div id="page-wrapper" style="padding-top: 4%; background-color: aquamarine;">
 
         <div class="row" style="margin-top: 15px;"></div>
 

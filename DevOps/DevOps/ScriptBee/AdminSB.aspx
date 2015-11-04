@@ -41,7 +41,7 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div id="page-wrapper" style="padding-top: 50px">
+    <div id="page-wrapper" style="padding-top: 50px; background-color: aquamarine;">
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header"><i class="fa fa-question-circle fa-fw"></i>Question Launcher</h1>

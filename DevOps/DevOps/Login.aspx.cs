@@ -30,7 +30,6 @@ namespace DevOps
             if (!IsPostBack)
             {
 
-
                 //if (Request.Cookies["lanid"] != null)
                 //    txtUserName.Text = Request.Cookies["lanid"].Value;
                 ////if (Request.Cookies["pwd"] != null)
@@ -156,6 +155,8 @@ namespace DevOps
                 }
                 catch (Exception)
                 {
+                    malingmensahe.ForeColor = System.Drawing.Color.Red;
+                    malingmensahe.Text = "You are not yet Registered";
                     //Response.Redirect("~/Login.aspx");
                     //malingmensahe.ForeColor = System.Drawing.Color.Red;
                     //malingmensahe.Text = "Invalid EID";
@@ -175,6 +176,26 @@ namespace DevOps
             _sbobj.Project = _arr[2].ToString();
 
             return _sbobj.InsertRegistration();
+        }
+
+        [System.Web.Services.WebMethodAttribute(), System.Web.Script.Services.ScriptMethodAttribute()]
+        public static string loginUser(List<string> _arr)
+        {
+            DataTable dummy = new DataTable();
+
+            SystemObjects.SBObj _sbobj = new SystemObjects.SBObj();
+            _sbobj.EID = _arr[0].ToString();
+            DataSet ds = new DataSet();
+            try
+            {
+                dummy.Merge(_sbobj.LoginUser());
+                ds.Tables.Add(dummy);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return ds.GetXml();
         }
 
     }

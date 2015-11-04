@@ -694,6 +694,14 @@ namespace DevOps.SystemObjects
 
             return msg;
         }
+
+        public DataTable LoginUser()
+        {
+            DataTable dt = new DataTable();
+            var oParam = new SqlCommand().Parameters;
+            oParam.AddWithValue("@eid", _eid);
+            return dt = this.FGetDataTable(@"TBGetLoginDetails", oParam);
+        }
         #endregion
 
 

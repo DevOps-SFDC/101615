@@ -71,6 +71,16 @@
             width: 290px;
         }
 
+        .loginFormContainer2 {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 6px;
+            box-shadow: rgba(0, 0, 0, 0.45) 2px 0px 2px;
+            height: 370px;
+            margin-top: 6%;
+            margin-left: 25%;
+            width: 290px;
+        }
+
         .loginFormBanner {
             color: #FFF;
             font-family: 'Lato',serif;
@@ -142,46 +152,64 @@
         <div class="loginBodyWrapper" style="vertical-align: central">
 
             <div class="loginFormContainer loginForm" style="display: inline-block" hidden="hidden">
+<%--                <div class="loginFormHeader">
+                    <span> <img src="Images/BOB.png" style="height: 40px; width: 40px" /> Sign in to Your Account</span>
+                    <hr style="color: #000; margin-top: 5px; margin-bottom: 5px" />
+                    <form id="sigin" class="navbar-form navbar-right" role="form" style="padding-left: 5px">
+                        <label style="text-align: center; font-size: 10px;">Enterprise ID</label><br />
+                        <div class="input-group" style="margin-bottom: 10px">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-user"></i>
+                            </span>
+                            <input id="txtUserName" class="form-control" placeholder="Enterprise ID" />
+                        </div>
+                        <button id="btnLogin" class="btn btn-primary btnLogin" type="button">Sign In</button>
+                    </form>
+                    <button id="btnRegisterHome" class="btn btn-info btnRegister">Register</button> 
+                </div>--%>
                 <div class="loginFormHeader">
                     <span> <img src="Images/BOB.png" style="height: 40px; width: 40px" /> Sign in to Your Account</span>
-                    <hr style="color: #000; margin-top: 5px; margin-bottom: 22px" />
+                    <hr style="color: #000; margin-top: 5px; margin-bottom: 0px" />
                     <form id="signin" class="navbar-form navbar-right" role="form" runat="server" style="padding-left: 5px">
+                        <label style="text-align: center; font-size: 10px;">Enterprise ID</label><br />
                     <div class="input-group" style="margin-bottom: 10px">
                         <span class="input-group-addon">
                             <i class="glyphicon glyphicon-user"></i>
                         </span>
-                        <asp:TextBox ID="txtUserName" runat="server" CssClass="form-control" placeholder="Enterprise ID" ClientIDMode="Static" />
+                        <asp:TextBox ID="txtUserName" runat="server" CssClass="form-control username" placeholder="Enterprise ID" ClientIDMode="Static" />
                     </div>
        
-                    <asp:Button ID="btnLogin" runat="server" CssClass="btn btn-primary btnLogin" Text="Sign In" OnClick="btnLogin_Click" OnClientClick="return validateCheck()" /><br />
+                    <asp:Button ID="btnLogin" runat="server" CssClass="btn btn-primary btnLogin" Text="Sign In" OnClick="btnLogin_Click" OnClientClick="return validateCheck()" type="button"/><br />
                     </form>
                     <button id="btnRegisterHome" class="btn btn-info btnRegister">Register</button> 
                     <br />
                     <asp:Label ID="malingmensahe" runat="server"></asp:Label>
-                    <%--<a href="https://directory.accenture.com/ChangePassword/ManagedPC.aspx" class="btn btn-success btnForgot">Can&rsquo;t Remember Password</a>--%>
                 </div>
             </div>
 
-            <div class="loginFormContainer registerForm" style="display: none">
+            <div class="loginFormContainer2 registerForm" style="display: none">
                 <div class="loginFormHeader">
-                    <span> <img src="Images/BOB.png" style="height: 40px; width: 40px" /> Sign in to Your Account</span>
-                    <hr style="color: #000; margin-top: 5px; margin-bottom: 22px" />
+                    <span> <img src="Images/BOB.png" style="height: 40px; width: 40px" /> Register with Your EID</span>
+                    <hr style="color: #000; margin-top: 5px; margin-bottom: 2px" />
                     <form id="Form1" class="navbar-form navbar-right" role="form" style="padding-left: 5px">
-                    <div class="input-group" style="margin-bottom: 10px">
+                        <label style="text-align: center; font-size: 10px;">Enterprise ID</label><br />
+                    <div class="input-group" style="margin-bottom: 0px">
                         <span class="input-group-addon">
                             <i class="glyphicon glyphicon-user"></i>
                         </span>
                         <input type="text" id="EID" class="form-control" placeholder="Enterprise ID" />
-                    </div>
-                    <div class="input-group" style="margin-bottom: 10px">
+                    </div><br />
+                        <label style="text-align: center; font-size: 10px;">Capability</label><br />
+                    <div class="input-group" style="margin-bottom: 0px">
                         <span class="input-group-addon">
-                            <i class="glyphicon glyphicon-user"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
                         </span>
                         <input type="text" id="CAP" class="form-control" placeholder="Capability" />
-                    </div>
+                    </div><br />
+                        <label style="text-align: center; font-size: 10px;">Project</label><br />
                     <div class="input-group" style="margin-bottom: 10px">
                         <span class="input-group-addon">
-                            <i class="glyphicon glyphicon-user"></i>
+                            <i class="glyphicon glyphicon-folder-close"></i>
                         </span>
                         <input type="text" id="PRO" class="form-control" placeholder="Project" />
                     </div>       
@@ -191,9 +219,13 @@
                     </form>
                 </div>
             </div>
+
             <div class="loginFormBanner" style="display: inline-block;">
-                <span style="margin-left: 1%; margin-top: 400px;">Ready to Take <br /> &nbsp;the Challenge?</span>
+                <span style="margin-left: 1%; margin-top: 400px;">Ready to Take
+                    <br />
+                    &nbsp;the Challenge?</span>
             </div>
+
         </div>
     </div>
 
@@ -208,14 +240,7 @@
                    $('.registerForm').css({ display: 'inline-block' }, "fast");
 
                });
-
-
-
-               //$('#btnGoBack').click(function () {
-               //    console.log('Hello');
-               //    $('.loginForm').show();
-               //    $('.registerForm').css({ display: 'inline-block' }, "fast");
-               //});
+               $('.username').val('');
            })
        
 
@@ -223,13 +248,8 @@
         function validateCheck() {
             var valid = true;
             var x = document.getElementById("txtUserName").value;
-            var y = document.getElementById("txtPassword").value;
             if (x == "") {
                 alert("Empty Lan ID..");
-                valid = false;
-            }
-            else if (y == "") {
-                alert("Empty Password..");
                 valid = false;
             }
             return valid;
@@ -246,21 +266,6 @@
             }
 
         });
-        //$('#EID').keydown(function (e) {
-        //    if (e.keyCode === 13) {
-        //        $('#REG').click();
-        //    }
-        //});
-        //$('#CAP').keydown(function (e) {
-        //    if (e.keyCode === 13) {
-        //        $('#REG').click();
-        //    }
-        //});
-        //$('#PRO').keydown(function (e) {
-        //    if (e.keyCode === 13) {
-        //        $('#REG').click();
-        //    }
-        //});
      
         function InsertRegistration() {
             var arr = new Array();

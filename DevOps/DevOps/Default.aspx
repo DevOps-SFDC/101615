@@ -115,7 +115,7 @@
 
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div id="page-wrapper">
+    <div id="page-wrapper" style="background-color:aquamarine; padding: 0px;">
 
         <div class="row" style="padding-top: 5%;">
             <div class="col-lg-12">
@@ -175,10 +175,11 @@
             <div class="col-lg-12">
                 <h1 class="page-header" style="text-align: center;">Dashboard</h1>
                 <br />
-                <div class="col-lg-9">
-                    <h2 class="page-header" style="text-align: center;">Rankings</h2>
-                    <div class="col-md-4">
-                        <h2 class="page-header" style="padding-top: 50%; text-align: center;">Top 2</h2>
+                <div class="col-lg-9" style="text-align: center;">
+                    <%--<h2 class="page-header" style="text-align: center;">Rankings</h2>--%>
+                    <span><label style="font-size: 36px;">Rankings</label></span><br />
+                    <div class="col-md-4" style="text-align: center;">
+                        <span><label style="font-size: 36px;padding-top: 50%;">Top 2</label></span>
                         <div class="aang2"></div>
                         <br />
                         <div class="eid3" style="text-align: center;"></div>
@@ -187,8 +188,10 @@
                         <p id="txttp2s" style="text-align: center;"></p>
                     </div>
 
-                    <div class="col-md-4">
-                        <h2 class="page-header" style="text-align: center;">Top 1</h2>
+                    <div class="col-md-4" style="text-align:center;">
+                        <span><label style="font-size: 36px;">Top 1</label></span>
+                        <%--<i class="glyphicon glyphicon-king"><label style="font-size: 16px;text-align: center;">Top 1</label></i>--%>
+                        <%--<h2 class="page-header" style="text-align: center;">Top 1</h2>--%>
                         <div class="aang1" style="text-align: center;"></div>
                         <br />
                         <div class="eid2" style="text-align: center;"></div>
@@ -197,8 +200,8 @@
                         <p id="txttp1s" style="text-align: center;"></p>
                     </div>
 
-                    <div class="col-md-4">
-                        <h2 class="page-header" style="padding-top: 50%; text-align: center;">Top 3</h2>
+                    <div class="col-md-4" style="text-align: center;">
+                        <span><label style="font-size: 36px;padding-top: 50%;">Top 3</label></span>
                         <div class="aang3"></div>
                         <br />
                         <div class="eid4" style="text-align: center;"></div>
@@ -209,13 +212,13 @@
                 </div>
                 <div class="col-lg-3">
                     <%--<h2 class="page-header" style="text-align: center;">Leader Board</h2>--%>
-                     <div class="chat-panel panel panel-default" id="chatpanelszxc">
-                        <div class="panel-heading">
+                     <div class="chat-panel panel panel-default" id="chatpanelszxc" style="border-color: crimson;">
+                        <div class="panel-heading" style="background-color: #704dd7">
                             <i class="glyphicon glyphicon-user"></i>
                             Leader Board
                             
                         </div>
-                        <div class="panel-body">
+                        <div class="panel-body" style="background-color: #fff">
                             <div class="table-responsive">
                                 <table id="leaderboard" class="table table-bordered dataTable">
                                     <thead>
@@ -227,13 +230,13 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="panel-footer">
+                        <div class="panel-footer" style="background-color: #704dd7">
                             <div class="input-group">
                                 <%--<input id="chatmess" type="text" class="form-control input-sm" placeholder="Type your message here...">--%>
                                 <span class="input-group-btn">
 
-                                    <button class="btn btn-warning btn-sm pull-right" type="button" id="refreshleaderboard">
-                                        Refresh Leader Board
+                                    <button class="btn btn-warning btn-sm pull-right" type="button" id="refreshleaderboard"  style="background-color: #a3c612">
+                                       <i class=" glyphicon glyphicon-refresh"></i> Refresh Leader Board
                                     </button>
                                 </span>
                             </div>
@@ -242,8 +245,11 @@
                 </div>
             </div>
         </div>
-        <footer class="pull-right">
-            © DevOps Techfair 2015
+        <footer style="background-color: #2C3E50; text-align: right;">
+            
+                <label  style="color: #8AC007; padding-right: 10px;">© DevOps Techfair 2015</label> 
+            
+            
         </footer>
 
     </div>
@@ -273,7 +279,6 @@
         }
 
         $('#refreshleaderboard').click(function () {
-            //LoadTopScorers();
             DisplayLeaderBoard();
         });
 
@@ -367,145 +372,14 @@
 
 
 
-        //function LoadTop1(userno) {
-        //    $.ajax({
-        //        type: "POST",
-        //        url: "Default.aspx/loadTop1",
-        //        data: '{userno: ' + userno + '}',
-        //        contentType: "application/json; charset=utf-8",
-        //        dataTaype: "json",
-        //        success: AjaxSucceeded,
-        //        error: AjaxError,
-        //        failure: AjaxFailure
-        //    });
-        //    function AjaxSucceeded(response) {
-        //        var xmlDoc = $.parseXML(response.d);
-        //        var xml = $(xmlDoc);
-        //        var exkeys = xml.find("Table1");
-        //        $.each(exkeys, function () {
 
-        //            $('#txttp1n').text($(this).find("EID").text());
-        //            $('#txttp1s').text($(this).find("Points").text() + ' Points');
-
-        //            var currentUrl = top.location.pathname;
-        //            var dirPathCon = currentUrl.split("/");
-        //            var dirPath = dirPathCon[dirPathCon.length - 1];
-        //            var dirPathNoExt = dirPath.split(".");
-        //            dirPathNoExt = dirPathNoExt[0];
-        //            console.log(dirPathNoExt);
-        //            var name = getNameInitials($('#txttp1n').text());
-        //            var color = colorPicker();
-        //            /* Avatar Specifications */
-        //            $('.eid2').append('<p style="margin: 0; color: black;">' + nameGenerator($('#txttp1n').text()) + '</p>');
-        //            $('.aang1').append('<p class="avatarName1">' + name + '</p>');
-        //            $('.aang1').css("background", color);
-        //            $('.qbtopline11').css("background", colorPicker());
-        //            $('.avatarName1').css("margin", "0");
-
-        //        });
-        //    }
-        //    function AjaxError(response) {
-        //        //alert(response.status + ' ' + response.statusText);
-        //    }
-        //    function AjaxFailure(response) {
-        //        //alert(response.status + ' ' + response.statusText);
-        //    }
-        //}
-
-        //function LoadTop2(userno) {
-        //    $.ajax({
-        //        type: "POST",
-        //        url: "Default.aspx/loadTop2",
-        //        data: '{userno: ' + userno + '}',
-        //        contentType: "application/json; charset=utf-8",
-        //        dataTaype: "json",
-        //        success: AjaxSucceeded,
-        //        error: AjaxError,
-        //        failure: AjaxFailure
-        //    });
-        //    function AjaxSucceeded(response) {
-        //        var xmlDoc = $.parseXML(response.d);
-        //        var xml = $(xmlDoc);
-        //        var exkeys = xml.find("Table1");
-        //        $.each(exkeys, function () {
-
-        //            $('#txttp2n').text($(this).find("EID").text());
-        //            $('#txttp2s').text($(this).find("Points").text() + ' Points');
-
-        //            var currentUrl = top.location.pathname;
-        //            var dirPathCon = currentUrl.split("/");
-        //            var dirPath = dirPathCon[dirPathCon.length - 1];
-        //            var dirPathNoExt = dirPath.split(".");
-        //            dirPathNoExt = dirPathNoExt[0];
-        //            console.log(dirPathNoExt);
-        //            var name = getNameInitials($('#txttp2n').text());
-        //            var color = colorPicker();
-        //            /* Avatar Specifications */
-        //            $('.eid3').append('<p style="margin: 0; color: black;">' + nameGenerator($('#txttp2n').text()) + '</p>');
-        //            $('.aang2').append('<p class="avatarName2">' + name + '</p>');
-        //            $('.aang2').css("background", color);
-        //            $('.qbtopline12').css("background", colorPicker());
-        //            $('.avatarName2').css("margin", "0");
-
-        //        });
-        //    }
-        //    function AjaxError(response) {
-        //        //alert(response.status + ' ' + response.statusText);
-        //    }
-        //    function AjaxFailure(response) {
-        //        //alert(response.status + ' ' + response.statusText);
-        //    }
-        //}
-
-        //function LoadTop3(userno) {
-        //    $.ajax({
-        //        type: "POST",
-        //        url: "Default.aspx/loadTop3",
-        //        data: '{userno: ' + userno + '}',
-        //        contentType: "application/json; charset=utf-8",
-        //        dataTaype: "json",
-        //        success: AjaxSucceeded,
-        //        error: AjaxError,
-        //        failure: AjaxFailure
-        //    });
-        //    function AjaxSucceeded(response) {
-        //        var xmlDoc = $.parseXML(response.d);
-        //        var xml = $(xmlDoc);
-        //        var exkeys = xml.find("Table1");
-        //        $.each(exkeys, function () {
-
-        //            $('#txttp3n').text($(this).find("EID").text());
-        //            $('#txttp3s').text($(this).find("Points").text() + ' Points');
-
-        //            var currentUrl = top.location.pathname;
-        //            var dirPathCon = currentUrl.split("/");
-        //            var dirPath = dirPathCon[dirPathCon.length - 1];
-        //            var dirPathNoExt = dirPath.split(".");
-        //            dirPathNoExt = dirPathNoExt[0];
-        //            console.log(dirPathNoExt);
-        //            var name = getNameInitials($('#txttp3n').text());
-        //            var color = colorPicker();
-        //            /* Avatar Specifications */
-        //            $('.eid4').append('<p style="margin: 0; color: black;">' + nameGenerator($('#txttp3n').text()) + '</p>');
-        //            $('.aang3').append('<p class="avatarName3">' + name + '</p>');
-        //            $('.aang3').css("background", color);
-        //            $('.qbtopline13').css("background", colorPicker());
-        //            $('.avatarName3').css("margin", "0");
-
-        //        });
-        //    }
-        //    function AjaxError(response) {
-        //        //alert(response.status + ' ' + response.statusText);
-        //    }
-        //    function AjaxFailure(response) {
-        //        //alert(response.status + ' ' + response.statusText);
-        //    }
-        //}
 
 
         function DisplayLeaderBoard() {
-            $('#leaderboard').dataTable().fnDestroy();
+            //$('#leaderboard').dataTable().fnDestroy();
+
             $('#leaderboard > tbody > tr').remove();
+            $('#leaderboard > thead > tr').remove();
             var arr = new Array();
             $.ajax({
                 type: "POST",
@@ -521,8 +395,7 @@
                         var ctm = $(this);
                         var row = '<tr></tr>';
                         var col = '<td>';
-                        col += $(this).find("dumID").text() + '. ' + $(this).find("EID").text() + '<br />' + $(this).find("Points").text() + ' Points' + '</td> ';
-
+                        col +=  $(this).find("EID").text() + '<br /><div style="text-align:right; font-size: 10px;">' + $(this).find("Points").text() + ' Points' + '</div></td> ';
 
 
                         $("[id*=leaderboard] tbody").append($(row).append(col));
