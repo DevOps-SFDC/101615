@@ -14,9 +14,10 @@ namespace DevOps.SystemObjects
 
 
         #region Declaration
-        private string _question, _answer, _difficulty, _status, _eid, _guestanswer, _capability, _project, _type, _title, _description, _message, _answer1, _answer2, _answer3, _danswer1, _danswer2, _danswer3;
+        private string _question, _answer, _difficulty, _status, _eid, _guestanswer, _capability, _project, _type, _title, _description, _message, _answer1, _answer2, _answer3, _danswer1, _danswer2, _danswer3, _firstname, _lastname;
         private int _questionid, _userno;
         private DateTime? _date;
+        private Decimal _timeanswered;
         #endregion
 
         #region Properties
@@ -65,11 +66,20 @@ namespace DevOps.SystemObjects
         { set { _danswer2 = value; } }
         public String Danswer3
         { set { _danswer3 = value; } }
+        public String FirstName
+        { set { _firstname = value; } }
+        public String LastName
+        { set { _lastname = value; } }
         #endregion
 
         #region DATE
         public DateTime? Date
         { set { _date = value; } }
+        #endregion
+
+        #region Decimal
+        public Decimal TimeAnswered
+        { set { _timeanswered = value; } }
         #endregion
 
         #endregion
@@ -278,7 +288,8 @@ namespace DevOps.SystemObjects
             oParam.AddWithValue("@questionid", _questionid);
             oParam.AddWithValue("@guestanswer", _guestanswer);
             oParam.AddWithValue("@eid", _eid);
-            return dt = this.FGetDataTable(@"SBCheckAnswer", oParam);
+            oParam.AddWithValue("@timeanswered", _timeanswered);
+            return dt = this.FGetDataTable(@"SBCheckAnswerN", oParam);
         }
         //public DataTable CheckAnswer()
         //{
@@ -527,6 +538,8 @@ namespace DevOps.SystemObjects
             oParam.AddWithValue("@eid", _eid);
             oParam.AddWithValue("@capability", _capability);
             oParam.AddWithValue("@project", _project);
+            oParam.AddWithValue("@firstname", _firstname);
+            oParam.AddWithValue("@lastname", _lastname);
             try
             {
                 this.ExecuteInsert(@"TBInsertRegistration", oParam);

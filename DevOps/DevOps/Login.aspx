@@ -75,7 +75,7 @@
             background: rgba(255, 255, 255, 0.98);
             border-radius: 6px;
             box-shadow: rgba(0, 0, 0, 0.45) 2px 0px 2px;
-            height: 370px;
+            height: 510px;
             margin-top: 6%;
             margin-left: 25%;
             width: 290px;
@@ -186,36 +186,57 @@
                     <asp:Label ID="malingmensahe" runat="server"></asp:Label>
                 </div>
             </div>
-
-            <div class="loginFormContainer2 registerForm" style="display: none">
+             <%--background: rgba(255, 255, 255, 0.98); border-radius: 6px; box-shadow: rgba(0, 0, 0, 0.45) 2px 0px 2px; height: 370px; margin-top: 6%; margin-left: 25%; width: 290px"--%>
+            <div class="loginFormContainer2 registerForm" style="display: none;">
                 <div class="loginFormHeader">
-                    <span> <img src="Images/BOB.png" style="height: 40px; width: 40px" /> Register with Your EID</span>
+                    <span>
+                        <img src="Images/BOB.png" style="height: 40px; width: 40px" />
+                        Register with Your EID</span>
                     <hr style="color: #000; margin-top: 5px; margin-bottom: 2px" />
                     <form id="Form1" class="navbar-form navbar-right" role="form" style="padding-left: 5px">
                         <label style="text-align: center; font-size: 10px;">Enterprise ID</label><br />
-                    <div class="input-group" style="margin-bottom: 0px">
-                        <span class="input-group-addon">
-                            <i class="glyphicon glyphicon-user"></i>
-                        </span>
-                        <input type="text" id="EID" class="form-control" placeholder="Enterprise ID" />
-                    </div><br />
+                        <div class="input-group" style="margin-bottom: 0px">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-user"></i>
+                            </span>
+                            <input type="text" id="EID" class="form-control" placeholder="Enterprise ID" />
+                        </div>
+                        <br />
+                        <label style="text-align: center; font-size: 10px;">First Name</label><br />
+                        <div class="input-group" style="margin-bottom: 0px">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-star-empty"></i>
+                            </span>
+                            <input type="text" id="FNAME" class="form-control" placeholder="First Name" />
+                        </div>
+                        <br />
+                        <label style="text-align: center; font-size: 10px;">Last Name</label><br />
+                        <div class="input-group" style="margin-bottom: 0px">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-star-empty"></i>
+                            </span>
+                            <input type="text" id="LNAME" class="form-control" placeholder="Last Name" />
+                        </div>
+                        <br />
                         <label style="text-align: center; font-size: 10px;">Capability</label><br />
-                    <div class="input-group" style="margin-bottom: 0px">
-                        <span class="input-group-addon">
-                            <i class="glyphicon glyphicon-star-empty"></i>
-                        </span>
-                        <input type="text" id="CAP" class="form-control" placeholder="Capability" />
-                    </div><br />
+                        <div class="input-group" style="margin-bottom: 0px">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-star-empty"></i>
+                            </span>
+                            <input type="text" id="CAP" class="form-control" placeholder="Capability" />
+                        </div>
+                        <br />
                         <label style="text-align: center; font-size: 10px;">Project</label><br />
-                    <div class="input-group" style="margin-bottom: 10px">
-                        <span class="input-group-addon">
-                            <i class="glyphicon glyphicon-folder-close"></i>
-                        </span>
-                        <input type="text" id="PRO" class="form-control" placeholder="Project" />
-                    </div>       
+                        <div class="input-group" style="margin-bottom: 10px">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-folder-close"></i>
+                            </span>
+                            <input type="text" id="PRO" class="form-control" placeholder="Project" />
+                        </div>
+                        <br />
                         <button type="button" id="REG" class="btn btn-primary">Register</button><br />
-                    <%--<button id="REG" class="btn btn-primary btnRegister btnRegisterNow">Register</button><br /> --%>
-                    <button id="GBC" class="btn btn-info btnGoBack"><i class="fa fa-arrow-circle-left"></i>&nbsp;&nbsp;&nbsp;Go Back</button><br /> 
+                        <%--<button id="REG" class="btn btn-primary btnRegister btnRegisterNow">Register</button><br /> --%>
+                        <button id="GBC" class="btn btn-info btnGoBack"><i class="fa fa-arrow-circle-left"></i>Go Back</button><br />
                     </form>
                 </div>
             </div>
@@ -233,7 +254,13 @@
     <script type="text/javascript">
 
 
-           $(document).ready(function () {
+        $(document).ready(function () {
+
+          if ('<%: Session["lanid"] %>' != '') {
+                window.location.href = "/Default.aspx";
+
+            }
+
 
                $('#btnRegisterHome').click(function () {
                    $('.loginForm').hide();
@@ -241,6 +268,7 @@
 
                });
                $('.username').val('');
+
            })
        
 
@@ -261,6 +289,14 @@
                 alert('Please Insert Your Enterprise ID!..');
                 $('#EID').focus();
             }
+            else if ($('#FNAME').val() == '') {
+                alert('Please Input your First Name!..');
+                $('#FNAME').focus();
+            }
+            else if ($('#LNAME').val() == '') {
+                alert('Please Input your Last Name!..');
+                $('#LNAME').focus();
+            }
             else {
                 InsertRegistration();
             }
@@ -272,7 +308,8 @@
             arr[0] = $('#EID').val();
             arr[1] = $('#CAP').val();
             arr[2] = $('#PRO').val();
-            //arr[2] = '<%: Session["lanid"] %>'
+            arr[3] = $('#FNAME').val();
+            arr[4] = $('#LNAME').val();
             $.ajax({
                 type: "POST",
                 url: "Login.aspx/insertRegistration",

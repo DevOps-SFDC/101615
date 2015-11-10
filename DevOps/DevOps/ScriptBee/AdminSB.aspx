@@ -486,7 +486,7 @@
                 $.each(exkeys, function () {
                     if ($('#questionid').val() == $(this).find("QuestionID").text()) {
                         $('#questionid').val(0);
-                        alert('No One Got the Right Answer!..\n Please Load a Question Again!..');
+                        alert('The Question Session is already Done!..\n Please Load a Question Again!..');
                         refreshquestionform();
                         DisplayQuestionaires();
                     }

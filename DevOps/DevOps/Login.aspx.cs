@@ -174,6 +174,8 @@ namespace DevOps
             _sbobj.EID = _arr[0].ToString();
             _sbobj.Capability = _arr[1].ToString();
             _sbobj.Project = _arr[2].ToString();
+            _sbobj.FirstName = _arr[3].ToString();
+            _sbobj.LastName = _arr[4].ToString();
 
             return _sbobj.InsertRegistration();
         }

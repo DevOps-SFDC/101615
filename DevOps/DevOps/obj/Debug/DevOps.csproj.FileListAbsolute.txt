@@ -198,3 +198,11 @@ C:\Users\julius.c.b.ca-aya\Desktop\Nov4\BOBREPO\DevOps\DevOps\bin\DevOps.dll
 C:\Users\julius.c.b.ca-aya\Desktop\Nov4\BOBREPO\DevOps\DevOps\bin\DevOps.pdb
 C:\Users\julius.c.b.ca-aya\Desktop\Nov4\BOBREPO\DevOps\DevOps\bin\System.Net.Http.dll
 C:\Users\julius.c.b.ca-aya\Desktop\Nov4\BOBREPO\DevOps\DevOps\bin\System.Net.Http.xml
+C:\Users\julius.c.b.ca-aya\Desktop\Nov6Rebase\BOBREPO\DevOps\DevOps\bin\DevOps.dll.config
+C:\Users\julius.c.b.ca-aya\Desktop\Nov6Rebase\BOBREPO\DevOps\DevOps\bin\DevOps.dll
+C:\Users\julius.c.b.ca-aya\Desktop\Nov6Rebase\BOBREPO\DevOps\DevOps\bin\DevOps.pdb
+C:\Users\julius.c.b.ca-aya\Desktop\Nov6Rebase\BOBREPO\DevOps\DevOps\bin\System.Net.Http.dll
+C:\Users\julius.c.b.ca-aya\Desktop\Nov6Rebase\BOBREPO\DevOps\DevOps\bin\System.Net.Http.xml
+C:\Users\julius.c.b.ca-aya\Desktop\Nov6Rebase\BOBREPO\DevOps\DevOps\obj\Debug\DevOps.csprojResolveAssemblyReference.cache
+C:\Users\julius.c.b.ca-aya\Desktop\Nov6Rebase\BOBREPO\DevOps\DevOps\obj\Debug\DevOps.dll
+C:\Users\julius.c.b.ca-aya\Desktop\Nov6Rebase\BOBREPO\DevOps\DevOps\obj\Debug\DevOps.pdb

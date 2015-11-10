@@ -108,6 +108,28 @@ namespace DevOps.ScriptBee
             return ds.GetXml();
         }
 
+        //OLD Check Answer
+        //[System.Web.Services.WebMethodAttribute(), System.Web.Script.Services.ScriptMethodAttribute()]
+        //public static string checkAnswer(List<string> _arr)
+        //{
+        //    DataTable dummy = new DataTable();
+
+        //    SystemObjects.SBObj _sbobj = new SystemObjects.SBObj();
+        //    _sbobj.QuestionID = Convert.ToInt32(_arr[0]);
+        //    _sbobj.GuestAnswer = _arr[1].ToString();
+        //    _sbobj.EID = _arr[2].ToString();
+        //    DataSet ds = new DataSet();
+        //    try
+        //    {
+        //        dummy.Merge(_sbobj.CheckAnswer());
+        //        ds.Tables.Add(dummy);
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //    }
+        //    return ds.GetXml();
+        //}
 
         [System.Web.Services.WebMethodAttribute(), System.Web.Script.Services.ScriptMethodAttribute()]
         public static string checkAnswer(List<string> _arr)
@@ -118,6 +140,7 @@ namespace DevOps.ScriptBee
             _sbobj.QuestionID = Convert.ToInt32(_arr[0]);
             _sbobj.GuestAnswer = _arr[1].ToString();
             _sbobj.EID = _arr[2].ToString();
+            _sbobj.TimeAnswered = Convert.ToDecimal(_arr[3].ToString());
             DataSet ds = new DataSet();
             try
             {

@@ -17,6 +17,16 @@
             width: 60%;
         }
 
+        .extracontainer {
+            border: 0px;
+            border-radius: 0;
+            /*background: rgba(37, 116, 169, 1);*/
+            box-shadow: rgba(0, 0, 0, 0.40) 2px 2px 2px;
+            color: #FFF;
+            padding-left: 110%;
+            width: 160%;
+        }
+
         /* entire container, keeps perspective */
         .flip-container {
             perspective: 1000;
@@ -91,76 +101,98 @@
 
         <div class="row" style="margin-top: 15px;"></div>
 
-        <label class="text-center pull-right" id="timer" style="font: bold 16px arial, verdana;">0:30 second</label><label class="text-center pull-right">Countdown:&nbsp;</label>
+        <label id="sekond" class ="pull-right"> Second</label><label class="text-center pull-right" id="timer" style="font: bold 16px arial, verdana;">30</label><label class="pull-right">0:</label><label class="text-center pull-right">Countdown:&nbsp;</label>
 
         <div class="row">
             <div class="col-lg-12">
             </div>
         </div>
 
-        <div id="questionform" class="panel panel-body well well-lg questionContainer">
-            <div class="col-xs-12" style="padding: 0px; box-shadow: rgba(0, 0, 0, 0.30) 0px 1px 1px; display: inline-block;">
-                <div class="col-md-12" style="background: rgba(44, 62, 80,1.0); color: #FFF; font-family: 'Open Sans',serif; padding-bottom: 15px; width: 100%">
-                    <h1 style="display: inline-block"><i class="fa fa-pencil"></i>&nbsp;Online Quiz Bee</h1>
-                </div>
-            </div>
+        <%--<div id="questionform" class="panel panel-body well well-lg questionContainer">
+            </div>--%>
 
-            <div class="col-xs-12" style="margin-top: 10px;">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <input type="hidden" class="form-control" id="questionid" />
-                        <label>Difficulty :</label>
-                        <input type="text" id="difficulty" class="form-control qbdiff" placeholder="Difficulty" readonly />
-                        <div class="clearfix"></div>
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div id="questionform" class="panel panel-body well well-lg" style="box-shadow: rgba(0, 0, 0, 0.40) 2px 2px 2px; background: rgba(37, 116,169,1);">
+                    <div class="col-xs-12" style="padding: 0px; box-shadow: rgba(0, 0, 0, 0.30) 0px 1px 1px; display: inline-block;">
+                        <div class="col-md-12" style="background: rgba(44, 62, 80,1.0); color: #FFF; font-family: 'Open Sans',serif; padding-bottom: 15px; width: 100%">
+                            <h1 style="display: inline-block"><i class="fa fa-pencil"></i>&nbsp;Online Quiz Bee</h1>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Points :</label>
-                        <input type="text" id="points" class="form-control" placeholder="Points" readonly />
+
+                    <div class="col-xs-12" style="margin-top: 10px;">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="hidden" class="form-control" id="questionid" />
+                                <label>Difficulty :</label>
+                                <input type="text" id="difficulty" class="form-control qbdiff" placeholder="Difficulty" readonly />
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Points :</label>
+                                <input type="text" id="points" class="form-control" placeholder="Points" readonly />
+                            </div>
+                        </div>
+
                     </div>
-                </div>
-
-            </div>
-            <div class="col-xs-12">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <%--<input type="hidden" id="questionid" />--%>
-                        <label>Question :</label>
-                        <textarea style="resize: none" id="question" rows="6" placeholder="Are you ready to answer?" class="form-control" readonly></textarea>
+                    <div class="col-xs-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <%--<input type="hidden" id="questionid" />--%>
+                                <label>Question :</label>
+                                <textarea style="resize: none" id="question" rows="6" placeholder="Are you ready to answer?" class="form-control" readonly></textarea>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
                     </div>
-                    <div class="clearfix"></div>
+
+                    <div class="col-xs-12">
+                        <div class="col-md-5">
+                        </div>
+                        <div class="col-md-3">
+                            <span id="errormes" style="color: red"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12">
+                        <div class="col-md-6" style="padding-top: 5%; padding-bottom: 10%;">
+                            <span id="answer1" style="border: 2px solid #FFFFFF; color: #FFFFFF; text-align: center; display: block; padding-bottom: 5%; padding-top: 5%; background: rgba(0, 0, 0, 0.55);"></span>
+                            <br />
+                            <span id="answer2" style="border: 2px solid #FFFFFF; color: #FFFFFF; text-align: center; display: block; padding-bottom: 5%; padding-top: 5%; background: rgba(0, 0, 0, 0.55);"></span>
+                        </div>
+                        <div class="col-md-6" style="padding-top: 5%; padding-bottom: 10%;">
+                            <span id="answer3" style="border: 2px solid #FFFFFF; color: #FFFFFF; text-align: center; display: block; padding-bottom: 5%; padding-top: 5%; background: rgba(0, 0, 0, 0.55);"></span>
+                            <br />
+                            <span id="answer4" style="border: 2px solid #FFFFFF; color: #FFFFFF; text-align: center; display: block; padding-bottom: 5%; padding-top: 5%; background: rgba(0, 0, 0, 0.55);"></span>
+                            <%--<textarea style="resize: none; height: 150px; margin-bottom: 20px" class="form-control" id="guestanswer" rows="5" placeholder="What is the answer?"></textarea>--%>
+                        </div>
+                    </div>
+
+
+
+                    <span id="ErrorDiv" class="Framework_Error_Message_Span"></span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="scorePanel panel panel-body well well-lg" style="box-shadow: rgba(0, 0, 0, 0.40) 2px 2px 2px; background: rgba(37, 116,169,1);">
+                    <div class="col-md-12" style="background: rgba(44, 62, 80,1.0); color: #FFF; font-family: 'Open Sans',serif; padding-bottom: 15px; width: 100%">
+                        <h3 style="display: inline-block"><i class=" glyphicon glyphicon-screenshot"></i> Score Panel</h3>
+                    </div>
+
+                    <div class="col-md-12">
+                        
+
+                    </div>
+
                 </div>
             </div>
 
-            <div class="col-xs-12">
-                <div class="col-md-5">
-                </div>
-                <div class="col-md-3">
-                    <span id="errormes" style="color: red"></span>
-                </div>
-            </div>
-
-            <div class="col-xs-12">
-                <div class="col-md-6" style="padding-top: 5%; padding-bottom: 10%;">
-                    <span id="answer1" style="border: 2px solid #FFFFFF; color: #FFFFFF; text-align: center; display: block; padding-bottom: 5%; padding-top: 5%; background: rgba(0, 0, 0, 0.55);"></span>
-                    <br />
-                    <span id="answer2" style="border: 2px solid #FFFFFF; color: #FFFFFF; text-align: center; display: block; padding-bottom: 5%; padding-top: 5%; background: rgba(0, 0, 0, 0.55);"></span>
-                </div>
-                <div class="col-md-6" style="padding-top: 5%; padding-bottom: 10%;">
-                    <span id="answer3" style="border: 2px solid #FFFFFF; color: #FFFFFF; text-align: center; display: block; padding-bottom: 5%; padding-top: 5%; background: rgba(0, 0, 0, 0.55);"></span>
-                    <br />
-                    <span id="answer4" style="border: 2px solid #FFFFFF; color: #FFFFFF; text-align: center; display: block; padding-bottom: 5%; padding-top: 5%; background: rgba(0, 0, 0, 0.55);"></span>
-                    <%--<textarea style="resize: none; height: 150px; margin-bottom: 20px" class="form-control" id="guestanswer" rows="5" placeholder="What is the answer?"></textarea>--%>
-                </div>
-            </div>
-
-            <span id="ErrorDiv" class="Framework_Error_Message_Span"></span>
         </div>
+        
 
-        <div class="scorePanel" style="background: #000; width: 100px; height: 300px; float: left;">
 
-        </div>
 
 
 
@@ -231,6 +263,7 @@
 
     <script type="text/javascript">
         var ans;
+        var CRA;
         var prm = new Sys.WebForms.PageRequestManager.getInstance();
         prm.add_initializeRequest(initializer);
         prm.add_endRequest(ender);
@@ -254,20 +287,6 @@
                 else if ('<%: Session["Type"]%>' == 'User'); {
                     $('#questionid').val(0);
                     CheckifQuizBeeStatusisActive();
-
-                    //refreshquestionform();
-
-                    //$('#answer1').disableSelection();
-                    //$('#answer2').disableSelection();
-                    //$('#answer3').disableSelection();
-                    //$('#answer4').disableSelection();
-                    //CheckQuizStatus();
-
-
-
-
-                                                   
-
 
 
                  }
@@ -307,7 +326,7 @@
                                $('#answer3').disableSelection();
                                $('#answer4').disableSelection();
                                CheckQuizStatus();
-
+                               setInterval(CheckdbifnotAnsweredd, 500);
 
 
 
@@ -356,10 +375,8 @@
 
                                                 }
                                                 function AjaxError(response) {
-                                                    //alert(response.status + ' ' + response.statusText);
                                                 }
                                                 function AjaxFailure(response) {
-                                                    //alert(response.status + ' ' + response.statusText);
                                                 }
                     });
 
@@ -424,7 +441,7 @@
             $('#meid2').text('');
         };
         function refreshquestionform() {
-            $('#timer').text('0:00 second');
+            $('#timer').text('00');
             $('#questionid').val(0);
             $('#question').val('');
             $('#points').val('');
@@ -473,7 +490,7 @@
                         }
                         else {
                             LoadQuestionIDforNewinRoom($('#questionid').val());
-                            setInterval(CheckdbifnotAnsweredd, 500);
+                            //setInterval(CheckdbifnotAnsweredd, 500);
                             setInterval(CheckdbAnswered, 500);
                         }
                     });
@@ -490,88 +507,12 @@
 
 
 
-
-
-
-        function CheckdbAnswered() {
-            CheckifAnswered($('#questionid').val());
-        };
-
-        function showmodalYGTRA() {
-
-            //$('#meid2').text('+ ' + $('#points').text() + ' Points')
-        };
-
-
-
-
-
-        function CheckifAnswered(questid) {
-            $.ajax({
-                type: "POST",
-                url: "UserSB.aspx/checkifAnswered",
-                data: '{questid: ' + questid + '}',
-                contentType: "application/json; charset=utf-8",
-                dataTaype: "json",
-                success: AjaxSucceeded,
-                error: AjaxError,
-                failure: AjaxFailure
-            });
-            function AjaxSucceeded(response) {
-                var xmlDoc = $.parseXML(response.d);
-                var xml = $(xmlDoc);
-                var exkeys = xml.find("Table1");
-                $.each(exkeys, function () {
-
-                    //alert($(this).find("EID").text());
-                    if ($(this).find("EID").text() == '<%: Session["lanid"]%>') {
-                        //alert('1');
-                        $('#questionid').val(0);
-                        refreshquestionform();
-                        killInterval();
-                        validatequestion();
-                    }
-                    else {
-                        $('#questionid').val(0);
-                        refreshquestionform();
-                        killInterval();
-                        validatequestion();
-                        $('#notification').modal('show');
-                        $('#myModalLabel1').text('Ooopps ! Better Luck next Time..');
-                        //$('#meid1').text($(this).find("EID").text());
-                        $('#meid1').text('Someone Already');
-                        $('#gtra').text('Got the right Answer');
-                        //$('#meid2').text(' + ' + $(this).find("Points").text() + ' Points for ' + $(this).find("EID").text());
-                        setInterval(LoadQuestdummyid, 500);
-                        UpdateQuizbeeStatusI();
-                    }
-                });
-               };
-               function AjaxError(response) {
-                   //alert(response.status + ' ' + response.statusText);
-               };
-               function AjaxFailure(response) {
-                   //alert(response.status + ' ' + response.statusText);
-               };
-           };
-
            function validatequestion() {
                if ($('#questionid').val() == 0) {
                    killInterval();
                }
                else {
-                   if ($('#difficulty').val() == 'Easy') {
-                       timerstart();
-                   }
-                   else if ($('#difficulty').val() == 'Average') {
-                       timerstartave();
-                   }
-                   else if ($('#difficulty').val() == 'Hard') {
-                       timerstarthard();
-                   }
-                   else if ($('#difficulty').val() == 'Extra') {
-                       timerstartextra();
-                   }
+                   timerstart();
 
                }
            };
@@ -582,7 +523,7 @@
                //$('#guestanswer').focus();
                timer = setInterval(function () {
 
-                   document.getElementById("timer").innerHTML = "  " + min + ":" + sec + " second";
+                   document.getElementById("timer").innerHTML = sec ;
                    sec--;
                    if (sec == 00) {
                        min = 0;
@@ -592,95 +533,16 @@
                        UpdateQuestionaireNotAnswered();
                        AlertCorrectAnswer($('#questionid').val());
                        refreshquestionform();
-                       //$('#timer').text('0:30 second');
+                       UpdateQuizbeeStatusI();
 
                    }
                }, 1000);
            };
            function killInterval() {
                clearInterval(timer);
-
            };
 
 
-           function timerstartave() {
-               var min = 0;
-               var sec = 45;
-               //$('#guestanswer').focus();
-               timerave = setInterval(function () {
-
-                   document.getElementById("timer").innerHTML = "  " + min + ":" + sec + " second";
-                   sec--;
-                   if (sec == 00) {
-                       min = 0;
-                       sec = 45;
-
-                       killIntervalave();
-                       UpdateQuestionaireNotAnswered();
-                       AlertCorrectAnswer($('#questionid').val());
-                       refreshquestionform();
-                       //$('#timer').text('0:30 second');
-
-                   }
-               }, 1000);
-           };
-           function killIntervalave() {
-               clearInterval(timerave);
-
-           };
-
-           function timerstarthard() {
-               var min = 0;
-               var sec = 90;
-               //$('#guestanswer').focus();
-               timerhard = setInterval(function () {
-
-                   document.getElementById("timer").innerHTML = "  " + min + ":" + sec + " second";
-                   sec--;
-                   if (sec == 00) {
-                       min = 0;
-                       sec = 90;
-
-                       killIntervalhard();
-                       UpdateQuestionaireNotAnswered();
-                       AlertCorrectAnswer($('#questionid').val());
-                       refreshquestionform();
-                       //$('#timer').text('0:30 second');
-
-                   }
-               }, 1000);
-           };
-           function killIntervalhard() {
-               clearInterval(timerhard);
-
-           };
-
-
-           function timerstartextra() {
-               var min = 0;
-               var sec = 20;
-               //$('#guestanswer').focus();
-               timerextra = setInterval(function () {
-
-                   document.getElementById("timer").innerHTML = "  " + min + ":" + sec + " second";
-                   sec--;
-                   if (sec == 00) {
-                       min = 0;
-                       sec = 20;
-
-                       killIntervalextra();
-                       UpdateQuestionaireNotAnswered();
-                       AlertCorrectAnswer($('#questionid').val());
-                       refreshquestionform();
-                       //$('#timer').text('0:30 second');
-
-                   }
-               }, 1000);
-           };
-           function killIntervalextra() {
-               clearInterval(timerextra);
-
-           };
 
 
            //Alert Correct Answer
@@ -701,21 +563,27 @@
                    var exkeys = xml.find("Table1");
                    $.each(exkeys, function () {
                        refreshquestionform();
-                       //UpdateQuestionaireNotAnswered();
                        validatequestion();
-                       killInterval();
-                       //killIntervalave();
-                       //killIntervalhard();
-                       //killIntervalextra();
-                       setInterval(CheckdbAnswered, 5000000);
                        setInterval(LoadQuestdummyid, 500);
-                       $('#timer').text('0:30 second');
-                       $('#notification').modal('show');
-                       $('#meid1').text('');
-                       $('#myModalLabel1').text('Times UP!..');
-                       $('#gtra').text('The Correct Answer is');
-                       $('#meid2').text($(this).find("CorrectAnswer").text());
                        UpdateQuizbeeStatusI();
+                       if (CRA == 'Correct') {
+                           $('#timer').text('00');
+                           $('#notification').modal('show');
+                           $('#meid1').text('');
+                           $('#myModalLabel1').text('Times UP!..');
+                           $('#gtra').text('You Got the Correct Answer');
+                           $('#meid2').text('Your Points is already added to your total Points!..');
+                       }
+                       else {
+                           $('#timer').text('00');
+                           $('#notification').modal('show');
+                           $('#meid1').text('');
+                           $('#myModalLabel1').text('Times UP!..');
+                           $('#gtra').text('The Correct Answer is');
+                           $('#meid2').text($(this).find("CorrectAnswer").text());
+                       }
+
+
 
                    });
                };
@@ -790,8 +658,6 @@
                            $('#question').val($(this).find("Question").text());
                            $('#difficulty').val($(this).find("Difficulty").text());
                            $('#points').val($(this).find("Point").text());
-                           setInterval(LoadQuestdummyid, 5000000);
-                           setInterval(CheckdbAnswered, 500);
                            UpdateQuizbeeStatus();
                        }
 
@@ -852,70 +718,70 @@
                    var exkeys = xml.find("Table1");
                    $.each(exkeys, function () {
 
-                       $('#answer1').bind("click", function () {
-                           document.getElementById("answer2").style.backgroundColor = "darkorange";
-                           document.getElementById("answer3").style.backgroundColor = "darkorange";
-                           document.getElementById("answer4").style.backgroundColor = "darkorange";
-                           document.getElementById("answer1").style.backgroundColor = "green";
-                       });
-                       $('#answer1').bind("dblclick", function () {
-                           document.getElementById("answer2").style.backgroundColor = "darkorange";
-                           document.getElementById("answer3").style.backgroundColor = "darkorange";
-                           document.getElementById("answer4").style.backgroundColor = "darkorange";
-                           document.getElementById("answer1").style.backgroundColor = "green";
-                           ans = $('#answer1').text();
-                           CheckAnswer();
-                       });
-
-                       $('#answer2').bind("click", function () {
-                           document.getElementById("answer1").style.backgroundColor = "darkorange";
-                           document.getElementById("answer3").style.backgroundColor = "darkorange";
-                           document.getElementById("answer4").style.backgroundColor = "darkorange";
-                           document.getElementById("answer2").style.backgroundColor = "green";
-                       });
-                       $('#answer2').bind("dblclick", function () {
-                           document.getElementById("answer1").style.backgroundColor = "darkorange";
-                           document.getElementById("answer3").style.backgroundColor = "darkorange";
-                           document.getElementById("answer4").style.backgroundColor = "darkorange";
-                           document.getElementById("answer2").style.backgroundColor = "green";
-                           ans = $('#answer2').text();
-                           CheckAnswer();
-                       });
-
-                       $('#answer3').bind("click", function () {
-                           document.getElementById("answer2").style.backgroundColor = "darkorange";
-                           document.getElementById("answer1").style.backgroundColor = "darkorange";
-                           document.getElementById("answer4").style.backgroundColor = "darkorange";
-                           document.getElementById("answer3").style.backgroundColor = "green";
-                       });
-                       $('#answer3').bind("dblclick", function () {
-                           document.getElementById("answer2").style.backgroundColor = "darkorange";
-                           document.getElementById("answer1").style.backgroundColor = "darkorange";
-                           document.getElementById("answer4").style.backgroundColor = "darkorange";
-                           document.getElementById("answer3").style.backgroundColor = "green";
-                           ans = $('#answer3').text();
-                           CheckAnswer();
-                       });
-                       $('#answer4').bind("click", function () {
-                           document.getElementById("answer2").style.backgroundColor = "darkorange";
-                           document.getElementById("answer3").style.backgroundColor = "darkorange";
-                           document.getElementById("answer1").style.backgroundColor = "darkorange";
-                           document.getElementById("answer4").style.backgroundColor = "green";
-                       });
-                       $('#answer4').bind("dblclick", function () {
-                           document.getElementById("answer2").style.backgroundColor = "darkorange";
-                           document.getElementById("answer3").style.backgroundColor = "darkorange";
-                           document.getElementById("answer1").style.backgroundColor = "darkorange";
-                           document.getElementById("answer4").style.backgroundColor = "green";
-                           ans = $('#answer4').text();
-                           CheckAnswer();
-                       });
 
                        $('#answer1').text($(this).find("answer1").text());
                        $('#answer2').text($(this).find("answer2").text());
                        $('#answer3').text($(this).find("answer3").text());
                        $('#answer4').text($(this).find("answer4").text());
 
+                       $('#answer1').bind("click", function () {
+                           document.getElementById("answer2").style.backgroundColor = "rgba(0, 0, 0, 0.45)";
+                           document.getElementById("answer3").style.backgroundColor = "rgba(0, 0, 0, 0.45)";
+                           document.getElementById("answer4").style.backgroundColor = "rgba(0, 0, 0, 0.45)";
+                           document.getElementById("answer1").style.backgroundColor = "green";
+                       });
+                       $('#answer1').bind("dblclick", function () {
+                           document.getElementById("answer2").style.backgroundColor = "rgba(0, 0, 0, 0.45)";
+                           document.getElementById("answer3").style.backgroundColor = "rgba(0, 0, 0, 0.45)";
+                           document.getElementById("answer4").style.backgroundColor = "rgba(0, 0, 0, 0.45)";
+                           document.getElementById("answer1").style.backgroundColor = "green";
+                           ans = $('#answer1').text();
+                           CheckAnswer();
+                       });
+
+                       $('#answer2').bind("click", function () {
+                           document.getElementById("answer1").style.backgroundColor = "rgba(0, 0, 0, 0.45)";
+                           document.getElementById("answer3").style.backgroundColor = "rgba(0, 0, 0, 0.45)";
+                           document.getElementById("answer4").style.backgroundColor = "rgba(0, 0, 0, 0.45)";
+                           document.getElementById("answer2").style.backgroundColor = "green";
+                       });
+                       $('#answer2').bind("dblclick", function () {
+                           document.getElementById("answer1").style.backgroundColor = "rgba(0, 0, 0, 0.45)";
+                           document.getElementById("answer3").style.backgroundColor = "rgba(0, 0, 0, 0.45)";
+                           document.getElementById("answer4").style.backgroundColor = "rgba(0, 0, 0, 0.45)";
+                           document.getElementById("answer2").style.backgroundColor = "green";
+                           ans = $('#answer2').text();
+                           CheckAnswer();
+                       });
+
+                       $('#answer3').bind("click", function () {
+                           document.getElementById("answer2").style.backgroundColor = "rgba(0, 0, 0, 0.45)";
+                           document.getElementById("answer1").style.backgroundColor = "rgba(0, 0, 0, 0.45)";
+                           document.getElementById("answer4").style.backgroundColor = "rgba(0, 0, 0, 0.45)";
+                           document.getElementById("answer3").style.backgroundColor = "green";
+                       });
+                       $('#answer3').bind("dblclick", function () {
+                           document.getElementById("answer2").style.backgroundColor = "rgba(0, 0, 0, 0.45)";
+                           document.getElementById("answer1").style.backgroundColor = "rgba(0, 0, 0, 0.45)";
+                           document.getElementById("answer4").style.backgroundColor = "rgba(0, 0, 0, 0.45)";
+                           document.getElementById("answer3").style.backgroundColor = "green";
+                           ans = $('#answer3').text();
+                           CheckAnswer();
+                       });
+                       $('#answer4').bind("click", function () {
+                           document.getElementById("answer2").style.backgroundColor = "rgba(0, 0, 0, 0.45)";
+                           document.getElementById("answer3").style.backgroundColor = "rgba(0, 0, 0, 0.45)";
+                           document.getElementById("answer1").style.backgroundColor = "rgba(0, 0, 0, 0.45)";
+                           document.getElementById("answer4").style.backgroundColor = "green";
+                       });
+                       $('#answer4').bind("dblclick", function () {
+                           document.getElementById("answer2").style.backgroundColor = "rgba(0, 0, 0, 0.45)";
+                           document.getElementById("answer3").style.backgroundColor = "rgba(0, 0, 0, 0.45)";
+                           document.getElementById("answer1").style.backgroundColor = "rgba(0, 0, 0, 0.45)";
+                           document.getElementById("answer4").style.backgroundColor = "green";
+                           ans = $('#answer4').text();
+                           CheckAnswer();
+                       });
 
                    });
                };
@@ -931,9 +797,12 @@
 
            function CheckAnswer() {
                var arr = new Array();
+               var timeanswered = $('#timer').text();
+               var spantime = 30;
                arr[0] = $('#questionid').val();
                arr[1] = ans;
-               arr[2] = '<%: Session["lanid"] %>'
+               arr[2] = '<%: Session["lanid"] %>';
+               arr[3] = $('#timer').text();
 
                $.ajax({
                    type: "POST",
@@ -949,16 +818,23 @@
                            var metrics = $(this);
                            //alert($(this).find("Answer").text());
                            if (ans == $(this).find("Answer").text()) {
-                               //UpdateCorrect();
+                               var divts = timeanswered / spantime;
+                               var totalpoints = divts * $('#points').val();
+                               $('#answer1').unbind('click');
+                               $('#answer1').unbind('dblclick');
+                               $('#answer2').unbind('click');
+                               $('#answer2').unbind('dblclick');
+                               $('#answer3').unbind('click');
+                               $('#answer3').unbind('dblclick');
+                               $('#answer4').unbind('click');
+                               $('#answer4').unbind('dblclick');
                                $('#notification').modal('show');
                                $('#myModalLabel1').text('Congratulations!..');
                                $('#meid1').text('You');
                                $('#gtra').text('Got the right Answer');
-                               $('#meid2').text(' + ' + $('#points').val() + ' Points');
-                               refreshquestionform();
-                               killInterval();
-                               validatequestion();
-                               UpdateQuizbeeStatusI();
+                               $('#meid2').text(' + ' + Math.round(totalpoints) + ' Points');
+                               CRA = 'Correct';
+
                            }
                            else if ($(this).find("Answer").text() == 'Wrong') {
                                $('#answer1').unbind('click');
@@ -976,10 +852,7 @@
                                //$('#gtra').text('You Choose the Wrong Answer');
                                $('#gtra').text('Your answer is incorrect! ');
                                $('#meid2').text('');
-                               ans = '';
-                           }
-                           else if ($(this).find("Answer").text() == 'Someone') {
-                               CheckdbAnswered();
+                               CRA = 'Incorrect';
                            }
                        });
 
@@ -1096,9 +969,8 @@
                    $.each(exkeys, function () {
                        if ($('#questionid').val() == $(this).find("QuestionID").text()) {
                            refreshquestionform();
-                           setInterval(CheckdbAnswered, 5000000);
-                           setInterval(LoadQuestdummyid, 500);
                            UpdateQuizbeeStatusI();
+                           setInterval(LoadQuestdummyid, 500);
                        }
                        else {
 
