@@ -277,7 +277,7 @@ namespace DevOps.SystemObjects
             DataTable dt = new DataTable();
             var oParam = new SqlCommand().Parameters;
             oParam.AddWithValue("@questionid", _questionid);
-            return dt = this.FGetDataTable(@"[SBDisplayChoices]", oParam);
+            return dt = this.FGetDataTable(@"SBDisplayChoices", oParam);
         }
 
 
@@ -714,6 +714,15 @@ namespace DevOps.SystemObjects
             var oParam = new SqlCommand().Parameters;
             oParam.AddWithValue("@eid", _eid);
             return dt = this.FGetDataTable(@"TBGetLoginDetails", oParam);
+        }
+
+
+        public DataTable LoadScore()
+        {
+            DataTable dt = new DataTable();
+            var oParam = new SqlCommand().Parameters;
+            oParam.AddWithValue("@eid", _eid);
+            return dt = this.FGetDataTable(@"SBLoadSCore", oParam);
         }
         #endregion
 

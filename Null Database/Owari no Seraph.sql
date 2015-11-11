@@ -7,7 +7,7 @@ TRUNCATE TABLE UserCredentialInfo
 
 UPDATE session SET sessionstatus = 'Inactive'
 
-UPDATE td_sbquest SET Status = 'Inactive' WHERE Status = 'Active' AND Status = 'Answered' AND Status= 'Not Answered'
+UPDATE td_sbquest SET Status = 'Inactive' WHERE Status = 'Active' OR Status = 'Answered' OR Status= 'Not Answered'
 
 UPDATE param SET UserSB = 'Inactive'
 

@@ -287,5 +287,25 @@ namespace DevOps.ScriptBee
             }
             return ds.GetXml();
         }
+
+        [System.Web.Services.WebMethodAttribute(), System.Web.Script.Services.ScriptMethodAttribute()]
+        public static string loadScore(List<string> _arr)
+        {
+            DataTable dummy = new DataTable();
+
+            SystemObjects.SBObj _sbobj = new SystemObjects.SBObj();
+            _sbobj.EID = _arr[0];
+            DataSet ds = new DataSet();
+            try
+            {
+                dummy.Merge(_sbobj.LoadScore());
+                ds.Tables.Add(dummy);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return ds.GetXml();
+        }
     }
 }

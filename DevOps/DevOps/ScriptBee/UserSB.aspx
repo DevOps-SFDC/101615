@@ -92,15 +92,33 @@
         .vertical.flip-container:hover .front {
             transform: rotateY(180deg);
         }
+
+        .aangs {
+            border: 3px solid #FFF;
+            border-radius: 50%;
+            box-shadow: rgba(0, 0, 0, 0.40) 1px 5px 5px;
+            color: #FFF;
+            font-family: 'Open Sans',serif;
+            font-size: 32px;
+            height: 100px;
+            width: 100px;
+            margin: 0 auto;
+            text-align: center;
+            text-shadow: 1px 0px 2px rgba(0, 0, 0, 0.40);
+            padding: 25px;
+            vertical-align: central;
+            background-color: cadetblue;
+        }
+
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="FeaturedContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
-    <div id="page-wrapper" style="padding-top: 4%; background-color: aquamarine;">
+    <div id="page-wrapper" style="padding-top: 4%;">
 
         <div class="row" style="margin-top: 15px;"></div>
-
+        <label id="blink" class="text-center center-block" style="text-align:center; padding: 0px; margin: 0px; color:red;">If problems, bugs or glitches persist kindly refresh your browser and wait for a question to be launch.. Thankyou ! Enjoy !..</label><br />
         <label id="sekond" class ="pull-right"> Second</label><label class="text-center pull-right" id="timer" style="font: bold 16px arial, verdana;">30</label><label class="pull-right">0:</label><label class="text-center pull-right">Countdown:&nbsp;</label>
 
         <div class="row">
@@ -175,15 +193,40 @@
                     <span id="ErrorDiv" class="Framework_Error_Message_Span"></span>
                 </div>
             </div>
+
             <div class="col-lg-4">
                 <div class="scorePanel panel panel-body well well-lg" style="box-shadow: rgba(0, 0, 0, 0.40) 2px 2px 2px; background: rgba(37, 116,169,1);">
                     <div class="col-md-12" style="background: rgba(44, 62, 80,1.0); color: #FFF; font-family: 'Open Sans',serif; padding-bottom: 15px; width: 100%">
                         <h3 style="display: inline-block"><i class=" glyphicon glyphicon-screenshot"></i> Score Panel</h3>
                     </div>
 
-                    <div class="col-md-12">
-                        
+                    <div class="col-md-12" style="text-align: center;">
+                        <span><label style="font-size: 36px; color: aquamarine;">Total Score</label></span>
+                        <div class="aangs" style="text-align: center;">
+                            <label id="totalscore"></label>
+                        </div>
+                        <br />
+<%--                        <div class="eids" style="text-align: center;"></div>
+                        <br />--%>
 
+                    </div>
+
+                </div>
+
+                <%--FACTS--%>
+                <div class="facts panel panel-body well well-lg" style="box-shadow: rgba(0, 0, 0, 0.40) 2px 2px 2px; background: rgba(37, 116,169,1);">
+                    <div class="col-md-12" style="background: rgba(44, 62, 80,1.0); color: #FFF; font-family: 'Open Sans',serif; padding-bottom: 0px; width: 100%">
+                        <h3 style="display: inline-block; margin-top: 0px;"><i class="glyphicon glyphicon-info-sign"></i> Facts</h3>
+                    </div>
+
+                    <div class="col-md-12" style="text-align: center; padding-top: 10px;">
+                        <span>
+                        <label id="lastquestion" style="font-size: 12px; color: aquamarine;"></label></span>
+                        <span>
+                        <label id="lastanswer" style="font-size: 12px; color: aquamarine;"></label></span>
+                        <br />
+                        <%--                        <div class="eids" style="text-align: center;"></div>
+                        <br />--%>
                     </div>
 
                 </div>
@@ -327,6 +370,8 @@
                                $('#answer4').disableSelection();
                                CheckQuizStatus();
                                setInterval(CheckdbifnotAnsweredd, 500);
+                               blinkeffect('#blink');
+                               LoadSCore();
 
 
 
@@ -403,6 +448,7 @@
 
 
                                                    ///unload and close update status
+
 
 
 
@@ -573,6 +619,9 @@
                            $('#myModalLabel1').text('Times UP!..');
                            $('#gtra').text('You Got the Correct Answer');
                            $('#meid2').text('Your Points is already added to your total Points!..');
+                           $('#lastquestion').text('Question:      ' + $(this).find("Question").text() + '\n\n');
+                           $('#lastanswer').text('Answer:      ' + $(this).find("CorrectAnswer").text() + '\n\n');
+                           LoadSCore();
                        }
                        else {
                            $('#timer').text('00');
@@ -581,6 +630,9 @@
                            $('#myModalLabel1').text('Times UP!..');
                            $('#gtra').text('The Correct Answer is');
                            $('#meid2').text($(this).find("CorrectAnswer").text());
+                           $('#lastquestion').text('Question:      ' + $(this).find("Question").text() + '\n\n');
+                           $('#lastanswer').text('Answer:      ' + $(this).find("CorrectAnswer").text() + '\n\n');
+                           LoadSCore();
                        }
 
 
@@ -834,6 +886,7 @@
                                $('#gtra').text('Got the right Answer');
                                $('#meid2').text(' + ' + Math.round(totalpoints) + ' Points');
                                CRA = 'Correct';
+                               LoadSCore();
 
                            }
                            else if ($(this).find("Answer").text() == 'Wrong') {
@@ -853,6 +906,7 @@
                                $('#gtra').text('Your answer is incorrect! ');
                                $('#meid2').text('');
                                CRA = 'Incorrect';
+                               LoadSCore();
                            }
                        });
 
@@ -986,6 +1040,45 @@
                }
            }
 
+
+
+           function LoadSCore() {
+               var arr = new Array();
+               arr[0] = '<%: Session["lanid"] %>';
+
+               $.ajax({
+                   type: "POST",
+                   url: "UserSB.aspx/loadScore",
+                   data: JSON.stringify({ _arr: arr }),
+                   contentType: "application/json; charset=utf-8",
+                   dataType: "json",
+                   success: function AjaxSucceded(response) {
+                       var xmlDoc = $.parseXML(response.d);
+                       var xml = $(xmlDoc);
+                       var details = xml.find("Table1");
+                       $.each(details, function () {
+                           var metrics = $(this);
+
+
+                           $('#totalscore').text($(this).find("Points").text());
+
+
+                       });
+
+                   },
+                   error: function AjaxError(response) { alert(response.status + ' ' + response.responseText); },
+                   failure: function AjaxFailure(response) { response.status + ' ' + response.statusText; }
+               })
+           }
+
+
+        function blinkeffect(selector) {
+            $(selector).fadeOut('slow', function () {
+                $(this).fadeIn('slow', function () {
+                    blinkeffect(this);
+                });
+            });
+        }
 
     </script>
 </asp:Content>
