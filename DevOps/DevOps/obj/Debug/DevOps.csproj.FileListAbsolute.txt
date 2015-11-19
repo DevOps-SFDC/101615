@@ -214,3 +214,11 @@ C:\Users\julius.c.b.ca-aya\Desktop\Nov11\BOBREPO\DevOps\DevOps\bin\System.Net.Ht
 C:\Users\julius.c.b.ca-aya\Desktop\Nov11\BOBREPO\DevOps\DevOps\obj\Debug\DevOps.csprojResolveAssemblyReference.cache
 C:\Users\julius.c.b.ca-aya\Desktop\Nov11\BOBREPO\DevOps\DevOps\obj\Debug\DevOps.dll
 C:\Users\julius.c.b.ca-aya\Desktop\Nov11\BOBREPO\DevOps\DevOps\obj\Debug\DevOps.pdb
+C:\Users\BagaCutee\Desktop\BOB\101615\DevOps\DevOps\bin\DevOps.dll.config
+C:\Users\BagaCutee\Desktop\BOB\101615\DevOps\DevOps\bin\DevOps.dll
+C:\Users\BagaCutee\Desktop\BOB\101615\DevOps\DevOps\bin\DevOps.pdb
+C:\Users\BagaCutee\Desktop\BOB\101615\DevOps\DevOps\bin\System.Net.Http.dll
+C:\Users\BagaCutee\Desktop\BOB\101615\DevOps\DevOps\bin\System.Net.Http.xml
+C:\Users\BagaCutee\Desktop\BOB\101615\DevOps\DevOps\obj\Debug\DevOps.csprojResolveAssemblyReference.cache
+C:\Users\BagaCutee\Desktop\BOB\101615\DevOps\DevOps\obj\Debug\DevOps.dll
+C:\Users\BagaCutee\Desktop\BOB\101615\DevOps\DevOps\obj\Debug\DevOps.pdb

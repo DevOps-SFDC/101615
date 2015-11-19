@@ -75,7 +75,7 @@
             background: rgba(255, 255, 255, 0.98);
             border-radius: 6px;
             box-shadow: rgba(0, 0, 0, 0.45) 2px 0px 2px;
-            height: 510px;
+            height: 550px;
             margin-top: 6%;
             margin-left: 25%;
             width: 290px;
@@ -151,7 +151,7 @@
         </div>
         <div class="loginBodyWrapper" style="vertical-align: central">
 
-            <div class="loginFormContainer loginForm" style="display: inline-block" hidden="hidden">
+            <div class="loginFormContainer loginForm col-lg-12" style="display: inline-block" hidden="hidden">
 <%--                <div class="loginFormHeader">
                     <span> <img src="Images/BOB.png" style="height: 40px; width: 40px" /> Sign in to Your Account</span>
                     <hr style="color: #000; margin-top: 5px; margin-bottom: 5px" />
@@ -187,13 +187,13 @@
                 </div>
             </div>
              <%--background: rgba(255, 255, 255, 0.98); border-radius: 6px; box-shadow: rgba(0, 0, 0, 0.45) 2px 0px 2px; height: 370px; margin-top: 6%; margin-left: 25%; width: 290px"--%>
-            <div class="loginFormContainer2 registerForm" style="display: none;">
+            <div class="loginFormContainer2 registerForm col-lg-12" style="display: none;">
                 <div class="loginFormHeader">
                     <span>
                         <img src="Images/BOB.png" style="height: 40px; width: 40px" />
                         Register with Your EID</span>
                     <hr style="color: #000; margin-top: 5px; margin-bottom: 2px" />
-                    <form id="Form1" class="navbar-form navbar-right" role="form" style="padding-left: 5px">
+                    <form id="Form1" class="navbar-form navbar-right" role="form" style="padding-left: 5px; border: 0px; margin: 0px;">
                         <label style="text-align: center; font-size: 10px;">Enterprise ID</label><br />
                         <div class="input-group" style="margin-bottom: 0px">
                             <span class="input-group-addon">
